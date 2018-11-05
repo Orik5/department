@@ -30,7 +30,7 @@ public class EmployeeServiceTest {
   }
 
   @Test
-  public void testAddHuman_returnsNewEmployee() {
+  public void testAddEmployee_returnsNewEmployee() {
     when(employeeRepository.save(any(Employee.class))).thenReturn(new Employee());
     Employee employee = new Employee();
     assertThat(employeeService.saveEmployee(employee), is(notNullValue()));
@@ -38,7 +38,7 @@ public class EmployeeServiceTest {
 
   //Using Answer to set an id to the customer which is passed in as a parameter to the mock method.
   @Test
-  public void testAddHuman_returnsNewHumanWithId() {
+  public void testAddHuman_returnsNewEmployeeWithId() {
     when(employeeRepository.save(any(Employee.class))).thenAnswer(new Answer<Employee>() {
       @Override
       public Employee answer(InvocationOnMock invocation) throws Throwable {

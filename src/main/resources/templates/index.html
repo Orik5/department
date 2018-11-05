@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<h1></h1>
+<table>
+  <thead>
+  <tr>
+    <th>empId</th>
+    <th>empName</th>
+    <th>empActive</th>
+    <th>empDepartment</th>
+  </tr>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+
+
+<form action="/addEmployee" method="post">
+
+  <label for="empName">empName</label>
+  <input name="empName" id="empName" type="text">
+  <label for="empActive">empActive</label>
+  <input name="empActive" id="empActive" type="text">
+  <label for="empDepartment">empDepartment</label>
+  <input name="empDepartment" id="empDepartment" type="text">
+  <button type="submit">save</button>
+  <button type="reset">cancel</button>
+</form>
+  <tbody>
+  <xsl:for-each select="/employees">
+
+
+  </xsl:for-each>
+  </tbody>
+</table>
+
+
+</body>
+</html>

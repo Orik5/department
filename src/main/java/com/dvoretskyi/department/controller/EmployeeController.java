@@ -34,7 +34,7 @@ public class EmployeeController {
      employeeService.saveEmployee();
      return "redirect:/";
    }*/
-  @RequestMapping(value = "/employees{id}")
+  @RequestMapping(value = "/employees{id}",method = RequestMethod.GET)
   public Employee getEmployee(@PathVariable("id") long id) {
     return employeeService.findEmployeeById(id);
   }

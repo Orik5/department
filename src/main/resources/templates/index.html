@@ -2,11 +2,17 @@
 <html lang="en" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title>Department</title>
+  <style> table, th, td {
+    border: 1px solid black;
+  }</style>
 </head>
 <body>
 <h1></h1>
-<table>
+table, th, td {
+border: 1px solid black;
+}
+<table >
   <thead>
   <tr>
     <th>empId</th>
@@ -16,12 +22,24 @@
   </tr>
   <tr>
     <th><a href="/api/employee/">view</a></th>
-    <th><a href="/api/employees">save</a></th>
-    <th><a href="/api/employees">remove</a></th>
-    <th><a href="/api/employee/">update</a> ></th>
+    <th></th>
+    <th></th>
+    <th></th>
   </tr>
   <tr>
+    <th><a href="/api/employees">save</a></th>
     <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <th><a href="/api/employees">remove</a></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <th><a href="/api/employee/">update</a></th>
     <th></th>
     <th></th>
     <th></th>
@@ -29,6 +47,15 @@
   </thead>
 
 
+
+  <tbody>
+  <xsl:for-each select="/employees">
+
+
+  </xsl:for-each>
+  </tbody>
+</table>
+<table><div>
   <form action="/addEmployee" method="post">
 
     <label for="empName">empName</label>
@@ -40,13 +67,8 @@
     <button type="submit">save</button>
     <button type="reset">cancel</button>
   </form>
-  <tbody>
-  <xsl:for-each select="/employees">
+</div></table>
 
-
-  </xsl:for-each>
-  </tbody>
-</table>
 
 
 </body>

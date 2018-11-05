@@ -34,13 +34,13 @@ public class EmployeeController {
      employeeService.saveEmployee();
      return "redirect:/";
    }*/
-  @RequestMapping(value = "/employee{id}")
+  @RequestMapping(value = "/employees{id}")
   public Employee getEmployee(@PathVariable("id") long id) {
     return employeeService.findEmployeeById(id);
   }
 
 
-  @RequestMapping(value = "/employee", method = RequestMethod.POST)
+  @RequestMapping(value = "/employees", method = RequestMethod.POST)
   public Employee addEmployee(Employee employee) {
     return employeeService.saveEmployee(employee);
   }
@@ -63,7 +63,7 @@ public class EmployeeController {
     return ResponseEntity.noContent().build();
   }
 
-  @RequestMapping(value = "/employee{id}", method = RequestMethod.DELETE)
+  @RequestMapping(value = "/employees{id}", method = RequestMethod.DELETE)
   public void updateEmployee(@PathVariable long id) {
     employeeService.deleteEmployeeById(id);
   }

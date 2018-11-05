@@ -4,6 +4,7 @@ import com.dvoretskyi.department.entity.Employee;
 import com.dvoretskyi.department.repository.EmployeeRepository;
 import com.dvoretskyi.department.services.EmployeeService;
 import java.util.List;
+import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,10 @@ import org.springframework.stereotype.Service;
 public class EmployeeServiceImpl implements EmployeeService {
 
   @Autowired
+  @InjectMocks
   private EmployeeRepository employeeRepository;
+
+  //private EmployeeRepository employeeRepository;
 
   @Override
   public Employee findEmployeeById(long id) {

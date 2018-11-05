@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,7 +24,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 //
-// @Table(name = "tblDepartments")
+ @Table(name = "tblDepartments")
 public class Department {
 
   @Id
@@ -33,8 +34,8 @@ public class Department {
   @Column(name = "dpName", nullable = false, length = 25)
   private String name;
   @OneToMany(mappedBy = "department")
-/*  @JoinTable(name = "employee_department", joinColumns = @JoinColumn(name = "dpId"),
-      inverseJoinColumns = @JoinColumn(name = "empId"))*/
+// @JoinTable(name = "employee_department", joinColumns = @JoinColumn(name = "dpId"),
+  //    inverseJoinColumns = @JoinColumn(name = "empId"))
   private List<Employee> employeeList;
 
 }

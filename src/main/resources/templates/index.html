@@ -15,10 +15,10 @@
     <th>empDepartment</th>
   </tr>
   <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th><a href="/api/employee/">view</a></th>
+    <th><a href="/api/employees">save</a></th>
+    <th><a href="/api/employees">remove</a></th>
+    <th><a href="/api/employee/">update</a> ></th>
   </tr>
   <tr>
     <th></th>
@@ -29,17 +29,17 @@
   </thead>
 
 
-<form action="/addEmployee" method="post">
+  <form action="/addEmployee" method="post">
 
-  <label for="empName">empName</label>
-  <input name="empName" id="empName" type="text">
-  <label for="empActive">empActive</label>
-  <input name="empActive" id="empActive" type="text">
-  <label for="empDepartment">empDepartment</label>
-  <input name="empDepartment" id="empDepartment" type="text">
-  <button type="submit">save</button>
-  <button type="reset">cancel</button>
-</form>
+    <label for="empName">empName</label>
+    <input name="empName" id="empName" type="text">
+    <label for="empActive">empActive</label>
+    <input name="empActive" id="empActive" type="text">
+    <label for="empDepartment">empDepartment</label>
+    <input name="empDepartment" id="empDepartment" type="text">
+    <button type="submit">save</button>
+    <button type="reset">cancel</button>
+  </form>
   <tbody>
   <xsl:for-each select="/employees">
 

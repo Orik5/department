@@ -38,7 +38,7 @@ public class EmployeeServiceTest {
 
   //Using Answer to set an id to the customer which is passed in as a parameter to the mock method.
   @Test
-  public void testAddHuman_returnsNewEmployeeWithId() {
+  public void testAddEmployee_returnsNewEmployeeWithId() {
     when(employeeRepository.save(any(Employee.class))).thenAnswer(new Answer<Employee>() {
       @Override
       public Employee answer(InvocationOnMock invocation) throws Throwable {

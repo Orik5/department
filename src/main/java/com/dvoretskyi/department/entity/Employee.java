@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-//@Table(name = "tblEmployees")
+@Table(name = "tblEmployees")
 public class Employee {
 
   @Id
@@ -30,7 +31,7 @@ public class Employee {
   @Column(name = "empActive")
   private boolean active;
   @ManyToOne
-  /*@JoinTable(name = "employee_department",
-      joinColumns = @JoinColumn(name = "empId"), inverseJoinColumns =@JoinColumn(name = "dpId"))*/
+  //@JoinTable(name = "employee_department",
+    //  joinColumns = @JoinColumn(name = "empId"), inverseJoinColumns =@JoinColumn(name = "dpId"))
   private Department department;
 }

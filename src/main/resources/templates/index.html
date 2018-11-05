@@ -7,13 +7,13 @@
     border: 1px solid black;
   }</style>
 </head>
+
 <body>
 <h1></h1>
-table, th, td {
-border: 1px solid black;
-}
-<table >
+
+<table style="width:70%">
   <thead>
+  <xsl:for-each select="/employees"></xsl:for-each>
   <tr>
     <th>empId</th>
     <th>empName</th>
@@ -55,7 +55,9 @@ border: 1px solid black;
   </xsl:for-each>
   </tbody>
 </table>
-<table><div>
+<br>
+<table style="width: 70%">
+  <div>
   <form action="/addEmployee" method="post">
 
     <label for="empName">empName</label>

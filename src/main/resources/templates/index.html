@@ -27,7 +27,7 @@
   <tr>
     <th><a href="/api/employees">view</a></th>
     <th><a href="/api/employee/">edit</a></th>
-    <th></th>
+    <th>%</th>
     <th></th>
     <th></th>
     <th></th>
@@ -80,6 +80,16 @@
   </div>
 </table>
 
-
+<div class="topnav">
+  <!--<a class="active" href="#home">Home</a>
+  <a href="#about">About</a>-->
+  <h2>employee search</h2>
+  <div class="search-container">
+    <form action="/api/employees">
+      <input type="text" placeholder="Search.." name="search">
+      <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+  </div>
+</div>
 </body>
 </html>

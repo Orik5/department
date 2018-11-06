@@ -46,7 +46,7 @@ public class EmployeeController {
   }
 
 
-  @RequestMapping(value = "/employee/{id}", method = RequestMethod.PUT)
+  @RequestMapping(value = "/employees/{id}", method = RequestMethod.PUT)
   public ResponseEntity<Object> updateEmployee(@RequestBody Employee employee,
       @PathVariable long id) {
 
@@ -63,7 +63,7 @@ public class EmployeeController {
     return ResponseEntity.noContent().build();
   }
 
-  @RequestMapping(value = "/employees{id}", method = RequestMethod.DELETE)
+  @RequestMapping(value = "/employees", method = RequestMethod.DELETE)
   public void deleteEmployee(@PathVariable long id) {
     employeeService.deleteEmployeeById(id);
   }

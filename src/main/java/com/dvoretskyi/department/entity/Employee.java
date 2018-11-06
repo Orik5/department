@@ -26,9 +26,9 @@ public class Employee {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "empID")
   private long id;
-  @Column(name = "empName", nullable = false, length = 55)
+ // @Column(name = "empName", nullable = false, length = 55)
   private String name;
-  @Column(name = "empActive")
+ // @Column(name = "empActive")
   private boolean active;
   @ManyToOne
   //@JoinTable(name = "employee_department",

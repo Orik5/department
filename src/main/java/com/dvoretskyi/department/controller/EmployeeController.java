@@ -64,7 +64,7 @@ public class EmployeeController {
   }
 
   @RequestMapping(value = "/employees{id}", method = RequestMethod.DELETE)
-  public void updateEmployee(@PathVariable long id) {
+  public void deleteEmployee(@PathVariable long id) {
     employeeService.deleteEmployeeById(id);
   }
 }

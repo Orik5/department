@@ -15,37 +15,45 @@
   <thead>
   <xsl:for-each select="/employees"></xsl:for-each>
   <tr>
+    <th><a href="/api/employees">view</a></th>
+    <th><a href="/api/employee/">edit</a></th>
     <th>empId</th>
     <th>empName</th>
     <th>empActive</th>
     <th>empDepartment</th>
-  </tr>
-  <tr>
-    <th><a href="/api/employee/">view</a></th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-  <tr>
-    <th><a href="/api/employees">save</a></th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-  <tr>
     <th><a href="/api/employees">remove</a></th>
+  </tr>
+
+  <tr>
+    <th><a href="/api/employees">view</a></th>
+    <th><a href="/api/employee/">edit</a></th>
     <th></th>
     <th></th>
     <th></th>
+    <th></th>
+    <th><a href="/api/employees">remove</a></th>
   </tr>
   <tr>
-    <th><a href="/api/employee/">update</a></th>
+    <th><a href="/api/employees">view</a></th>
+    <th><a href="/api/employee/">edit</a></th>
     <th></th>
     <th></th>
     <th></th>
+    <th></th>
+    <th><a href="/api/employees">remove</a></th>
   </tr>
-  </thead>
+  <tr>
+    <th><a href="/api/employees">view</a></th>
+    <th><a href="/api/employee/">edit</a></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th><a href="/api/employees">remove</a></th>
 
+  </tr>
+
+  </thead>
 
 
   <tbody>
@@ -58,19 +66,19 @@
 <br>
 <table style="width: 70%">
   <div>
-  <form action="/addEmployee" method="post">
+    <form action="/addEmployee" method="post">
 
-    <label for="empName">empName</label>
-    <input name="empName" id="empName" type="text">
-    <label for="empActive">empActive</label>
-    <input name="empActive" id="empActive" type="text">
-    <label for="empDepartment">empDepartment</label>
-    <input name="empDepartment" id="empDepartment" type="text">
-    <button type="submit">save</button>
-    <button type="reset">cancel</button>
-  </form>
-</div></table>
-
+      <label for="empName">empName</label>
+      <input name="empName" id="empName" type="text">
+      <label for="empActive">empActive</label>
+      <input name="empActive" id="empActive" type="text">
+      <label for="empDepartment">empDepartment</label>
+      <input name="empDepartment" id="empDepartment" type="text">
+      <button type="submit">save</button>
+      <button type="reset">cancel</button>
+    </form>
+  </div>
+</table>
 
 
 </body>

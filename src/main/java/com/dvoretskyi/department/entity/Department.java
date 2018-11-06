@@ -33,6 +33,7 @@ public class Department {
   private long id;
   @Column(name = "dpName", nullable = false, length = 25)
   private String name;
+
   @OneToMany(mappedBy = "department")
 // @JoinTable(name = "employee_department", joinColumns = @JoinColumn(name = "dpId"),
   //    inverseJoinColumns = @JoinColumn(name = "empId"))

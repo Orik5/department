@@ -1,8 +1,10 @@
 package com.dvoretskyi.department.entity;
 
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,14 +29,19 @@ public class Employee {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
- @Column(name = "empID")
+  @Column(name = "empID")
   private long id;
- // @Column(name = "empName", nullable = false, length = 55)
+  @Column(name = "empName", length = 55)
   private String name;
- // @Column(name = "empActive")
+  @Column(name = "empActive")
   private boolean active;
-  @ManyToMany//(mappedBy = "tblEmployees")
+
+  @ManyToMany(fetch = FetchType.LAZY,
+      cascade = {
+          CascadeType.PERSIST,
+          CascadeType.MERGE
+      })
   @JoinTable(name = "employee_department",
-    joinColumns = @JoinColumn(name = "empId"), inverseJoinColumns =@JoinColumn(name = "dpId"))
+      joinColumns = @JoinColumn(name = "empId"), inverseJoinColumns = @JoinColumn(name = "dpId"))
   private List<Department> department;
 }

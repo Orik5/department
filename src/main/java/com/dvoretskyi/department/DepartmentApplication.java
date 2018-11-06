@@ -1,5 +1,8 @@
 package com.dvoretskyi.department;
 
+import javafx.application.Application;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -9,6 +12,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 
 public class DepartmentApplication {
+
+  private static final Logger log = LoggerFactory.getLogger(Application.class);
 
   /**
    * The entry point of application.
@@ -22,24 +27,28 @@ public class DepartmentApplication {
 
   /*@Bean
   public CommandLineRunner istertingIntoDatabase(EmployeeRepository employeeRepository) {
-    return (args) -> {
+    return (args) -> {*/
       // save a couple of customers
-      employeeRepository.save(new Employee(1, "Yura",  true, "+44343468"));
-      employeeRepository.save(new Employee(2, "George, true, "));
-      employeeRepository.save(new Employee(3, "Mykola", "Bob", "Mumbai", "+3398909"));
-      employeeRepository.save(new Employee(4, "David", "Palmer", "Saul", "+3478890"));
-      employeeRepository.save(new Employee(5, "Max", "Tony", "Ohtyrka", "+33235t78"));
+    /*  List<Department>departments = new ArrayList();
+      departments.add(new Department(1,"d3",t));
+
+      employeeRepository.save(new Employee(1, "Yura", true, departments));
+      employeeRepository.save(new Employee(2, "George", true, departments));
+      employeeRepository.save(new Employee(3, "Mykola", true,departments ));
+      employeeRepository.save(new Employee(4, "David", true,departments ));
+      employeeRepository.save(new Employee(5, "Max", true, departments));*/
 
       // fetch all customers
-      log.info("Customers found with findAll():");
+    /*  log.info("Customers found with findAll():");
       log.info("-------------------------------");
-      for (Human human : humanRepository.findAll()) {
-        log.info(humanRepository.toString());
+      for (Employee:
+      employeeRepository.findAll()) {
+        log.info(employeeRepository.toString());
       }
       log.info("");*/
 
       // fetch an individual customer by ID
-     /* humanRepository.findById(1L)
+     /* employeeRepository.findById(1L)
           .ifPresent(human -> {
             log.info("Customer found with findById(1L):");
             log.info("--------------------------------");
@@ -48,13 +57,15 @@ public class DepartmentApplication {
           });*/
 
       // fetch customers by last name
-     /* log.info("Customer found with findByLastName('Bauer'):");
-      log.info("--------------------------------------------");*/
-  //   humanRepository.findBySecondName("Yura").forEach(yura -> {
-  //    log.info(yura.toString());
-   // });
-     //  for (Human bob : humanRepository.findBySecondName("Bob")) {
-   // log.info(bob.toString());
+      //log.info("Customer found with findByLastName('Bauer'):");
+      //log.info("--------------------------------------------");*/
+      // employeeRepository.findById(3L).forEach(yura -> {
+      // log.info(yura.toString());
+      //});
+ /*     for (Employee bob : employeeRepository.findById()) {
+        log.info(bob.toString());
+      }
+      log.info("");*/
+   // };
  // }
-   //   log.info("");
 }

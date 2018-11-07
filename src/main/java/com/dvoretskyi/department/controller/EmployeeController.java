@@ -2,19 +2,22 @@ package com.dvoretskyi.department.controller;
 
 import com.dvoretskyi.department.entity.Employee;
 import com.dvoretskyi.department.services.EmployeeService;
-import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
 
-@RestController
+@Controller
 @RequestMapping("/api")
 public class EmployeeController {
 
@@ -24,21 +27,24 @@ public class EmployeeController {
   private EmployeeService employeeService;
 
 
-  @RequestMapping(value = "/employees", method = RequestMethod.GET)
-  public List<Employee> getAllEmployees() {
-    return employeeService.findAllEmployees();
+  @GetMapping("/")
+  public String listEmployees(Model model) {
+    model.addAttribute("employees", employeeService.findAllEmployees());
+    return "index";
   }
 
-  /* @RequestMapping(value = "/addEmployee", method = RequestMethod.POST)
-   public String addEmployee(@RequestParam("empName") String empName,@RequestParam("empActive") boolean empActive) {
-     employeeService.saveEmployee();
-     return "redirect:/";
-   }*/
-  @RequestMapping(value = "/employees{id}",method = RequestMethod.GET)
-  public Employee getEmployee(@PathVariable("id") long id) {
-    return employeeService.findEmployeeById(id);
+  @PostMapping(value = "/addEmployee")
+  public String addEmployee(@RequestParam("empName") String empName,
+      @RequestParam("empActive") boolean empActive) {
+    employeeService.saveEmployee(new Employee(empName, empActive));
+    return "redirect:/";
   }
 
+  @RequestMapping(value = "/employees/{id}", method = RequestMethod.GET)
+  public String getEmployee(@PathVariable("id") long id, Model model) {
+    model.addAttribute("employee", employeeService.findEmployeeById(id));
+    return "employee";
+  }
 
   @RequestMapping(value = "/employees", method = RequestMethod.POST)
   public Employee addEmployee(Employee employee) {
@@ -63,8 +69,9 @@ public class EmployeeController {
     return ResponseEntity.noContent().build();
   }
 
-  @RequestMapping(value = "/employees", method = RequestMethod.DELETE)
-  public void deleteEmployee(@PathVariable long id) {
+  @RequestMapping(value = "/removeEmployee/{id}", method = RequestMethod.GET)
+  public String deleteEmployee(@PathVariable long id) {
     employeeService.deleteEmployeeById(id);
+    return "redirect:/";
   }
 }

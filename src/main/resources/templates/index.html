@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>Department</title>
@@ -11,71 +11,39 @@
 <body>
 <h1></h1>
 
-<table  style="width:70%">
+<table style="width:70%">
   <thead>
-  <xsl:for-each select="/employees"></xsl:for-each>
+
   <tr>
-    <th><a href="/api/employees">view</a></th>
-    <th><a href="/api/employee/">edit</a></th>
     <th>empId</th>
     <th>empName</th>
     <th>empActive</th>
-    <th>empDepartment</th>
-    <th><a href="/api/employees">remove</a></th>
-  </tr>
-
-  <tr>
-    <th><a href="/api/employees">view</a></th>
-    <th><a href="/api/employee/">edit</a></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th><a href="/api/employees">remove</a></th>
-  </tr>
-  <tr>
-    <th><a href="/api/employees">view</a></th>
-    <th><a href="/api/employee/">edit</a></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th><a href="/api/employees">remove</a></th>
-  </tr>
-  <tr>
-    <th><a href="/api/employees">view</a></th>
-    <th><a href="/api/employee/">edit</a></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th><a href="/api/employees">remove</a></th>
-
-  </tr>
-
+    <th>empDepartment</th></tr>
   </thead>
-
-
   <tbody>
-  <xsl:for-each select="/employees">
-
-
-  </xsl:for-each>
+  <th:block th:each="employee : ${employees}">
+    <tr>
+      <td th:text="${employee.id}"></td>
+      <td th:text="${employee.name}"></td>
+      <td th:text="${employee.active}"></td>
+      <th><a th:href="@{'/employees/' + ${employee.id}}">view</a></th>
+      <th><a href="/api/employee/">edit</a></th>
+      <td><a th:href="@{'/removeEmployee/' + ${employee.id}}">remove</a></td>
+    </tr>
+  </th:block>
   </tbody>
 </table>
 <br>
 <table style="width: 70%">
   <div>
     <form action="/addEmployee" method="post">
-
       <label for="empName">empName</label>
       <input name="empName" id="empName" type="text">
       <label for="empActive">empActive</label>
-      <input name="empActive" id="empActive" type="text">
-      <label for="empDepartment">empDepartment</label>
-      <input name="empDepartment" id="empDepartment" type="text">
-      <button type="submit">save</button>
-      <button type="reset">cancel</button>
+      <input id="empActive" name="empActive" type="radio" value="true">
+      <label for="empNotActive">empNotActive</label>
+      <input id="empNotActive" name="empActive" type="radio" value="false">
+      <input type="submit"/>
     </form>
   </div>
 </table>

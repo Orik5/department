@@ -23,8 +23,6 @@ public interface EmployeeService {
    */
   void deleteEmployeeById(long id);
 
-  /*  Department findEmployeeByName(String name);*/
-
   /**
    * Save employee employee.
    *

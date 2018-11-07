@@ -31,6 +31,7 @@ import lombok.ToString;
 @Table(name = "tblDepartments")
 public class Department {
 
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "dpID")
@@ -44,6 +45,10 @@ public class Department {
       })
   @JoinTable(name = "employee_department", joinColumns = @JoinColumn(name = "dpId"),
       inverseJoinColumns = @JoinColumn(name = "empId"))
+
   private List<Employee> employee;
 
+  public Department(String name) {
+    this.name = name;
+  }
 }

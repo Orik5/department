@@ -12,7 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,9 +22,10 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-@AllArgsConstructor
+
+
 @Table(name = "tblEmployees")
-public class Employee {
+public class Employee  {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,6 +42,11 @@ public class Employee {
           CascadeType.MERGE
       })
   @JoinTable(name = "employee_department",
-      joinColumns = @JoinColumn(name = "empId"), inverseJoinColumns = @JoinColumn(name = "dpId"))
+      joinColumns = @JoinColumn(name ="empId"), inverseJoinColumns = @JoinColumn(name = "dpId"))
   private List<Department> department;
+
+  public Employee(String name, boolean active) {
+    this.name = name;
+    this.active = active;
+  }
 }

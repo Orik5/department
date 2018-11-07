@@ -23,7 +23,6 @@ public interface DepartmentService {
    */
   void deleteDepartmentById(long id);
 
-  /*  Department findDepartmantByName(String name);*/
 
   /**
    * Save department department.
@@ -39,6 +38,5 @@ public interface DepartmentService {
    * @return the list
    */
   List<Department> findAllDepartments();
-
 
 }

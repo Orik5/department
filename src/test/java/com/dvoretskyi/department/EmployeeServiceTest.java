@@ -14,8 +14,6 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
 public class EmployeeServiceTest {
 
@@ -37,23 +35,7 @@ public class EmployeeServiceTest {
   }
 
   //Using Answer to set an id to the customer which is passed in as a parameter to the mock method.
-  @Test
-  public void testAddEmployee_returnsNewEmployeeWithId() {
-    when(employeeRepository.save(any(Employee.class))).thenAnswer(new Answer<Employee>() {
-      @Override
-      public Employee answer(InvocationOnMock invocation) throws Throwable {
-        Object[] arguments = invocation.getArguments();
-        if (arguments != null && arguments.length > 0 && arguments[0] != null) {
-          Employee employee = (Employee) arguments[0];
-          employee.setId(1);
-          return employee;
-        }
-        return null;
-      }
-    });
-    Employee employee = new Employee();
-    assertThat(employeeService.saveEmployee(employee), is(notNullValue()));
-  }
+
 
   //Throwing an exception from the mocked method
   @Test(expected = RuntimeException.class)

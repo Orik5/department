@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Department</title>
+  <style> table, th, td {
+    border: 1px solid black;
+  }</style>
+</head>
+<body>
+<th:block th:each="department : ${departments}">
+  <tr>
+    <td th:text="${department.id}"></td>
+    <td th:text="${department.name}"></td>
+    <!---- TODO>
+    <!--<td><a th:href="@{'/employees/' + ${employee.id}}">view</a></td>-->
+    <!--<td><a th:href="@{'/editEmployee/' + ${employee.id}}">edit</a></td>-->
+    <!--<td><a th:href="@{'/removeEmployee/' + ${employee.id}}">remove</a></td>-->
+  </tr>
+</th:block>
+</body>
+</html>

@@ -7,6 +7,7 @@ import java.util.List;
  * The interface Department service.
  */
 public interface DepartmentService {
+
   /**
    * Find department by id department.
    *
@@ -38,7 +39,6 @@ public interface DepartmentService {
    * @return the list
    */
   List<Department> findAllDepartments();
-
 
 
 }

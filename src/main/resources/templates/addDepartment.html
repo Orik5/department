@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Department</title>
+  <style> table, th, td {
+    border: 1px solid black;
+  }</style>
+</head>
+<body>
+<div>
+  <form action="/addDepartment" method="post">
+    <label for="name">Name department </label>
+    <input name="name" id="name" type="text">
+    <input type="submit"/>
+  </form>
+</div>
+</body>
+</html>

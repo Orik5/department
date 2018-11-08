@@ -40,4 +40,17 @@ public class EmployeeServiceImpl implements EmployeeService {
     return employeeRepository.findAll();
   }
 
+  @Override
+  public List<Employee> findByName(String name) {
+    return employeeRepository.findByName(name);
+  }
+
+  @Override
+  public void editEmployee(Long id, Employee employee) {
+    Employee changedEmployee = findEmployeeById(id);
+    changedEmployee.setActive(employee.getActive());
+    changedEmployee.setName(employee.getName());
+    changedEmployee.setDepartment(employee.getDepartment());
+    employeeRepository.save(changedEmployee);
+  }
 }

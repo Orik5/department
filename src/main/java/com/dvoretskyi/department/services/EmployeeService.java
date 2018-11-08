@@ -38,5 +38,8 @@ public interface EmployeeService {
    * @return the list
    */
   List<Employee> findAllEmployees();
+  List<Employee> findByName(String name);
+
+  void editEmployee(Long id, Employee employee);
 
 }

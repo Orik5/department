@@ -1,44 +1,44 @@
 package com.dvoretskyi.department.controller;
 
+import com.dvoretskyi.department.entity.Department;
 import com.dvoretskyi.department.entity.Employee;
+import com.dvoretskyi.department.services.DepartmentService;
 import com.dvoretskyi.department.services.EmployeeService;
-import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class EmployeeController {
-
   public static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
 
   @Autowired
   private EmployeeService employeeService;
 
-
-  @GetMapping("/")
-  public String listEmployees(Model model) {
-    model.addAttribute("employees", employeeService.findAllEmployees());
-    return "index";
-  }
+  @Autowired
+  private DepartmentService departmentService;
 
   @PostMapping(value = "/addEmployee")
-  public String addEmployee(@RequestParam("empName") String empName,@RequestParam("empActive") boolean empActive) {
-    employeeService.saveEmployee(new Employee(empName, empActive));
+  public String addEmployee(@RequestParam("empName") String empName, @RequestParam("empActive") Boolean empActive, @RequestParam("department") Department department) {
+    System.out.println(department);
+    if (department == null || department.toString().equals("")) {
+      employeeService.saveEmployee(new Employee(empName, empActive));
+    } else {
+      employeeService.saveEmployee(new Employee(empName, empActive, department));
+    }
     return "redirect:/";
   }
+
   @RequestMapping(value = "/employees/{id}", method = RequestMethod.GET)
-  public String getEmployee(@PathVariable("id") long id, Model model) {
+  public String getEmployeeInformationById(@PathVariable("id") long id, Model model) {
     model.addAttribute("employee", employeeService.findEmployeeById(id));
     return "employee";
   }
@@ -48,27 +48,30 @@ public class EmployeeController {
     return employeeService.saveEmployee(employee);
   }
 
-
-  @RequestMapping(value = "/employees/{id}", method = RequestMethod.PUT)
-  public ResponseEntity<Object> updateEmployee(@RequestBody Employee employee,
-      @PathVariable long id) {
-
-    Optional<Employee> optionalEmployee = Optional.ofNullable(employeeService.findEmployeeById(id));
-
-    if (!optionalEmployee.isPresent()) {
-      return ResponseEntity.notFound().build();
-    }
-
-    employee.setId(id);
-
-    employeeService.saveEmployee(employee);
-
-    return ResponseEntity.noContent().build();
-  }
-
   @RequestMapping(value = "/removeEmployee/{id}", method = RequestMethod.GET)
   public String deleteEmployee(@PathVariable long id) {
     employeeService.deleteEmployeeById(id);
+    return "redirect:/";
+  }
+
+  @RequestMapping(value = "search", method = RequestMethod.POST)
+  public String searchEmployees(@RequestParam("name") String name, Model model) {
+    model.addAttribute("employeesSearched", employeeService.findByName(name));
+    return "searchEmployee";
+  }
+
+  @GetMapping("/editEmployee/{id}")
+  public String getPageEditEmployee(@PathVariable("id") Long id, Model model) {
+    model.addAttribute("employee", employeeService.findEmployeeById(id));
+    model.addAttribute("departments", departmentService.findAllDepartments());
+    return "editEmployee";
+  }
+
+  @PostMapping("/editEmployee")
+  public String editEmployee(@RequestParam("id") Long id, @RequestParam("empName") String empName,
+      @RequestParam("empActive") Boolean empActive,
+      @RequestParam("department") Department department) {
+    employeeService.editEmployee(id, new Employee(empName, empActive, department));
     return "redirect:/";
   }
 }

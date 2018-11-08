@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Searched employee</title>
+  <style> table, th, td {
+    border: 1px solid black;
+  }</style>
+</head>
+
+<body>
+<div th:each="employee : ${employeesSearched}">
+  <tr>
+    <td th:text="${employee.id}"></td>
+    <td th:text="${employee.name}"></td>
+    <td th:text="${employee.active}"></td>
+    <th><a th:href="@{'/employees/' + ${employee.id}}">view</a></th>
+    <th><a href="/api/employee/">edit</a></th>
+    <td><a th:href="@{'/removeEmployee/' + ${employee.id}}">remove</a></td>
+  </tr>
+</div>
+</body>
+</html>

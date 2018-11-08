@@ -1,5 +1,6 @@
 package com.dvoretskyi.department.entity;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,8 +26,8 @@ import lombok.ToString;
 
 
 @Table(name = "tblEmployees")
-public class Employee  {
-
+public class Employee implements Serializable {
+  private static final long serialVersionUID = -8582553475226281591L;
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "empID")

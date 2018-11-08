@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/api")
 public class EmployeeController {
 
   public static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
@@ -34,12 +33,10 @@ public class EmployeeController {
   }
 
   @PostMapping(value = "/addEmployee")
-  public String addEmployee(@RequestParam("empName") String empName,
-      @RequestParam("empActive") boolean empActive) {
+  public String addEmployee(@RequestParam("empName") String empName,@RequestParam("empActive") boolean empActive) {
     employeeService.saveEmployee(new Employee(empName, empActive));
     return "redirect:/";
   }
-
   @RequestMapping(value = "/employees/{id}", method = RequestMethod.GET)
   public String getEmployee(@PathVariable("id") long id, Model model) {
     model.addAttribute("employee", employeeService.findEmployeeById(id));

@@ -7,7 +7,6 @@ import java.util.List;
  * The interface Employee service.
  */
 public interface EmployeeService {
-
   /**
    * Find employee by id employee.
    *
@@ -22,6 +21,8 @@ public interface EmployeeService {
    * @param id the id
    */
   void deleteEmployeeById(long id);
+
+  /*  Department findEmployeeByName(String name);*/
 
   /**
    * Save employee employee.

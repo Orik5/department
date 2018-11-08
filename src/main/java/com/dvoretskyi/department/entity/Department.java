@@ -31,7 +31,6 @@ import lombok.ToString;
 @Table(name = "tblDepartments")
 public class Department {
 
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "dpID")

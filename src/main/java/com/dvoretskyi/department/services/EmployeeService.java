@@ -1,6 +1,5 @@
 package com.dvoretskyi.department.services;
 
-import com.dvoretskyi.department.entity.Department;
 import com.dvoretskyi.department.entity.Employee;
 import java.util.List;
 
@@ -25,8 +24,13 @@ public interface EmployeeService {
 
   /*  Department findEmployeeByName(String name);*/
 
-
-  Employee saveEmployee(String empName, Boolean empActive, Department department);
+  /**
+   * Save employee employee.
+   *
+   * @param employee the employee
+   * @return the employee
+   */
+  Employee saveEmployee(Employee employee);
 
   /**
    * Find all employees list.

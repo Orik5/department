@@ -14,8 +14,6 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
 public class DepartmentServiceTest {
   @Mock
@@ -36,7 +34,7 @@ public class DepartmentServiceTest {
   }
 
   //Using Answer to set an id to the customer which is passed in as a parameter to the mock method.
-  @Test
+ /* @Test
   public void testAddDepartment_returnsNewDepartmentWithId() {
     when(departmentRepository.save(any(Department.class))).thenAnswer(new Answer<Department>() {
       @Override
@@ -53,7 +51,7 @@ public class DepartmentServiceTest {
    Department department = new Department();
     assertThat(departmentService.saveDepartment(department), is(notNullValue()));
   }
-
+*/
   //Throwing an exception from the mocked method
   @Test(expected = RuntimeException.class)
   public void testAddDepartment_throwsException() {

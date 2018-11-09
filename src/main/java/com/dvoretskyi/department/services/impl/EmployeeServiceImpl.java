@@ -1,5 +1,6 @@
 package com.dvoretskyi.department.services.impl;
 
+import com.dvoretskyi.department.entity.Department;
 import com.dvoretskyi.department.entity.Employee;
 import com.dvoretskyi.department.repository.EmployeeRepository;
 import com.dvoretskyi.department.services.EmployeeService;
@@ -31,8 +32,12 @@ public class EmployeeServiceImpl implements EmployeeService {
   }
 
   @Override
-  public Employee saveEmployee(Employee employee) {
-    return employeeRepository.save(employee);
+  public Employee saveEmployee(String empName, Boolean empActive, Department department) {
+    if (department == null || department.toString().equals("")) {
+      return employeeRepository.save(new Employee(empName, empActive));
+    } else {
+      return employeeRepository.save(new Employee(empName, empActive, department));
+    }
   }
 
   @Override

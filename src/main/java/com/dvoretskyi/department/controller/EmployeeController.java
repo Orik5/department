@@ -27,13 +27,10 @@ public class EmployeeController {
   private DepartmentService departmentService;
 
   @PostMapping(value = "/addEmployee")
-  public String addEmployee(@RequestParam("empName") String empName, @RequestParam("empActive") Boolean empActive, @RequestParam("department") Department department) {
-    System.out.println(department);
-    if (department == null || department.toString().equals("")) {
-      employeeService.saveEmployee(new Employee(empName, empActive));
-    } else {
-      employeeService.saveEmployee(new Employee(empName, empActive, department));
-    }
+  public String addEmployee(@RequestParam("empName") String empName,
+      @RequestParam("empActive") Boolean empActive,
+      @RequestParam("department") Department department) {
+    employeeService.saveEmployee(empName, empActive, department);
     return "redirect:/";
   }
 
@@ -41,11 +38,6 @@ public class EmployeeController {
   public String getEmployeeInformationById(@PathVariable("id") long id, Model model) {
     model.addAttribute("employee", employeeService.findEmployeeById(id));
     return "employee";
-  }
-
-  @RequestMapping(value = "/employees", method = RequestMethod.POST)
-  public Employee addEmployee(Employee employee) {
-    return employeeService.saveEmployee(employee);
   }
 
   @RequestMapping(value = "/removeEmployee/{id}", method = RequestMethod.GET)

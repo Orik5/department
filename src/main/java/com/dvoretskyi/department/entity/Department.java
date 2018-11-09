@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,17 +33,11 @@ public class Department {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "dpID")
-  private long id;
+  private Long id;
   @Column(name = "dpName", nullable = false, length = 25)
   private String name;
-  @ManyToMany(fetch = FetchType.LAZY,
-      cascade = {
-          CascadeType.PERSIST,
-          CascadeType.MERGE
-      })
-  @JoinTable(name = "employee_department", joinColumns = @JoinColumn(name = "dpId"),
-      inverseJoinColumns = @JoinColumn(name = "empId"))
 
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "department", cascade = CascadeType.ALL)
   private List<Employee> employee;
 
   public Department(String name) {

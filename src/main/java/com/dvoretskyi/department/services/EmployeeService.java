@@ -25,12 +25,7 @@ public interface EmployeeService {
 
   /*  Department findEmployeeByName(String name);*/
 
-  /**
-   * Save employee employee.
-   *
-   * @param employee the employee
-   * @return the employee
-   */
+
   Employee saveEmployee(String empName, Boolean empActive, Department department);
 
   /**

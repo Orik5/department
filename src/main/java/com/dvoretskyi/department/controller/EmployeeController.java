@@ -2,68 +2,94 @@ package com.dvoretskyi.department.controller;
 
 import com.dvoretskyi.department.entity.Department;
 import com.dvoretskyi.department.entity.Employee;
-import com.dvoretskyi.department.services.DepartmentService;
-import com.dvoretskyi.department.services.EmployeeService;
+import com.dvoretskyi.department.services.impl.EmployeeServiceImpl;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import java.util.List;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.hateoas.config.EnableHypermediaSupport;
+import org.springframework.hateoas.config.EnableHypermediaSupport.HypermediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
+@RequestMapping("/api")
+@Api(value = "department")
+@EnableHypermediaSupport(type = HypermediaType.HAL)
 public class EmployeeController {
+
   public static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
-
   @Autowired
-  private EmployeeService employeeService;
+  private EmployeeServiceImpl employeeService;
 
-  @Autowired
-  private DepartmentService departmentService;
 
-  @PostMapping(value = "/addEmployee")
-  public String addEmployee(@RequestParam("empName") String empName,
-      @RequestParam("empActive") Boolean empActive,
-      @RequestParam("department") Department department) {
-    employeeService.saveEmployee(empName, empActive, department);
-    return "redirect:/";
+  @ApiResponses(value = {
+      @ApiResponse(code = 200, message = "Successfully retrieved list"),
+      @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+      @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+      @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+  }
+  )
+
+  @ApiOperation(value = "View a list of employees", response = Iterable.class)
+  @RequestMapping(value = "/employees", method = RequestMethod.GET, produces = {
+      "application/hal+json"})
+  public List<Employee> getAllEmployees() {
+    return employeeService.findAllEmployees();
+
+
   }
 
-  @RequestMapping(value = "/employees/{id}", method = RequestMethod.GET)
-  public String getEmployeeInformationById(@PathVariable("id") long id, Model model) {
-    model.addAttribute("employee", employeeService.findEmployeeById(id));
-    return "employee";
+
+  @ApiOperation(value = "Search employee by Id", response = Employee.class)
+  @RequestMapping(value = "/employees{id}", method = RequestMethod.GET, produces = {
+      "application/hal+json"})
+  public Employee getEmployee(@PathVariable("id") long id) {
+    return employeeService.findEmployeeById(id);
   }
 
-  @RequestMapping(value = "/removeEmployee/{id}", method = RequestMethod.GET)
-  public String deleteEmployee(@PathVariable long id) {
+  @ApiOperation(value = "Add employee")
+  @RequestMapping(value = "/employees", method = RequestMethod.POST, produces = {
+      "application/hal+json"})
+  public Employee addEmployee(String empName, Boolean empActive, Department department) {
+    return employeeService.saveEmployee(empName, empActive, department);
+  }
+
+
+  @ApiOperation(value = "Update employee")
+  @RequestMapping(value = "/employees{id}", method = RequestMethod.PUT, produces = {
+      "application/hal+json"})
+  public ResponseEntity<Object> updateEmployee(@RequestBody Employee employee,
+      @PathVariable long id) {
+
+    Optional<Employee> employeeOptional = Optional.ofNullable(employeeService.findEmployeeById(id));
+
+    if (!employeeOptional.isPresent()) {
+      return ResponseEntity.notFound().build();
+    }
+
+    employee.setId(id);
+
+    employeeService.editEmployee(id, employee);
+
+    return ResponseEntity.noContent().build();
+  }
+
+
+  @ApiOperation(value = "Delete employee")
+  @RequestMapping(value = "/employees/{id}", method = RequestMethod.DELETE, produces = {
+      "application/hal+json"})
+  public void deleteEmployee(@PathVariable long id) {
     employeeService.deleteEmployeeById(id);
-    return "redirect:/";
-  }
 
-  @RequestMapping(value = "search", method = RequestMethod.POST)
-  public String searchEmployees(@RequestParam("name") String name, Model model) {
-    model.addAttribute("employeesSearched", employeeService.findByName(name));
-    return "searchEmployee";
-  }
-
-  @GetMapping("/editEmployee/{id}")
-  public String getPageEditEmployee(@PathVariable("id") Long id, Model model) {
-    model.addAttribute("employee", employeeService.findEmployeeById(id));
-    model.addAttribute("departments", departmentService.findAllDepartments());
-    return "editEmployee";
-  }
-
-  @PostMapping("/editEmployee")
-  public String editEmployee(@RequestParam("id") Long id, @RequestParam("empName") String empName,
-      @RequestParam("empActive") Boolean empActive,
-      @RequestParam("department") Department department) {
-    employeeService.editEmployee(id, new Employee(empName, empActive, department));
-    return "redirect:/";
   }
 }

@@ -53,7 +53,7 @@ public class EmployeeServiceImpl implements EmployeeService {
   }
 
   @Override
-  public void editEmployee(Long id, Employee employee) {
+  public void editEmployee(long id, Employee employee) {
     Employee changedEmployee = findEmployeeById(id);
     changedEmployee.setActive(employee.getActive());
     changedEmployee.setName(employee.getName());

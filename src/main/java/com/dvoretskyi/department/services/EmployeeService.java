@@ -8,6 +8,7 @@ import java.util.List;
  * The interface Employee service.
  */
 public interface EmployeeService {
+
   /**
    * Find employee by id employee.
    *
@@ -34,8 +35,9 @@ public interface EmployeeService {
    * @return the list
    */
   List<Employee> findAllEmployees();
+
   List<Employee> findByName(String name);
 
-  void editEmployee(Long id, Employee employee);
+  void editEmployee(long id, Employee employee);
 
 }

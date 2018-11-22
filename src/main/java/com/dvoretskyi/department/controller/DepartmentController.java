@@ -4,7 +4,6 @@ import com.dvoretskyi.department.entity.Department;
 import com.dvoretskyi.department.services.DepartmentService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * The type Department controller.
  */
-@Controller
+/*@Controller*/
 
 public class DepartmentController {
 
@@ -28,7 +27,7 @@ public class DepartmentController {
    *
    * @return the add department page
    */
-  @GetMapping("/addDepartment")
+  @GetMapping("/departments")
   public String getAddDepartmentPage() {
     return "/addDepartment";
   }
@@ -39,7 +38,7 @@ public class DepartmentController {
    * @param model the model
    * @return the departments page
    */
-  @GetMapping("/getDepartments")
+  @GetMapping("/departments")
   public String getDepartmentsPage(Model model) {
     model.addAttribute("departments", departmentService.findAllDepartments());
     return "departments";
@@ -51,7 +50,7 @@ public class DepartmentController {
    * @param name the name
    * @return the string
    */
-  @PostMapping("/addDepartment")
+  @PostMapping("/departments")
   public String addDeparture(@RequestParam("name") String name) {
     departmentService.saveDepartment(new Department(name));
     return "redirect:/";

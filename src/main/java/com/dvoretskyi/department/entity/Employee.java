@@ -22,18 +22,18 @@ import lombok.ToString;
 
 @Table(name = "tblEmployees")
 public class Employee {
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "empID")
-  private Long id;
-  @Column(name = "empName", length = 55)
+  private long id;
+ @Column(name = "empName", length = 55)
   private String name;
-  @Column(name = "empActive")
+
+ @Column(name = "empActive")
   private Boolean active;
 
-  @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "emp_dpID", referencedColumnName = "dpID")
+ @ManyToOne(fetch = FetchType.EAGER)
+ @JoinColumn(name = "emp_dpID", referencedColumnName = "dpID")
   private Department department;
 
   public Employee(String name, boolean active) {

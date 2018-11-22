@@ -26,11 +26,10 @@ import lombok.ToString;
 
 @Table(name = "tblDepartments")
 public class Department {
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "dpID")
-  private Long id;
+  private long id;
   @Column(name = "dpName", nullable = false, length = 25)
   private String name;
 

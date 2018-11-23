@@ -16,24 +16,44 @@ public class DepartmentServiceImpl implements DepartmentService {
   @Autowired
   private DepartmentRepository departmentRepository;
 
-  @Override
+ /* @Override
   public Department findDepartmentById(long id) {
     return departmentRepository.findById(id).get();
   }
-
+*/
+ @Override
+ public Department findDepartmentById(long id) {
+  Department department = departmentRepository.findDepartmentById(id);
+   return department;
+ }
+/*
   @Override
   public void deleteDepartmentById(long id) {
     departmentRepository.deleteById(id);
-  }
+  }*/
 
   @Override
+  public void deleteDepartmentById(long id) {
+    departmentRepository.deleteDepartmentById(id);
+  }
+/*  @Override
   public Department saveDepartment(Department department) {
     return departmentRepository.save(department);
-  }
+  }*/
 
   @Override
-  public List<Department> findAllDepartments() {
-    return departmentRepository.findAll();
+  public void saveDepartment(Department department) {
+     departmentRepository.addDepartment(department);
   }
 
+
+
+ /* @Override
+  public List<Department> findAllDepartments() {
+    return departmentRepository.findAll();
+  }*/
+ @Override
+ public List<Department> findAllDepartments() {
+  return departmentRepository.findAllDepartmentds();
+ }
 }

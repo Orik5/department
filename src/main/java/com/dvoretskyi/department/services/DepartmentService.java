@@ -31,8 +31,9 @@ public interface DepartmentService {
    * @param department the department
    * @return the department
    */
-  Department saveDepartment(Department department);
+ //Department saveDepartment(Department department);
 
+  void saveDepartment(Department department);
   /**
    * Find all departments list.
    *

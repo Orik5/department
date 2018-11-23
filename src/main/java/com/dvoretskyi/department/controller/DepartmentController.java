@@ -85,10 +85,15 @@ public class DepartmentController {
    * @param department the department
    * @return the department
    */
-  @RequestMapping(value = "/departments", method = RequestMethod.POST)
+/*  @RequestMapping(value = "/departments", method = RequestMethod.POST)
   public Department addDepartment(Department department) {
     return departmentService.saveDepartment(department);
+  }*/
+  @RequestMapping(value = "/departments", method = RequestMethod.POST)
+  public void addDepartment(Department department) {
+     departmentService.saveDepartment(department);
   }
+
 
   /**
    * Delete department.

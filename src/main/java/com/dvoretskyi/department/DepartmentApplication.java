@@ -18,6 +18,14 @@ public class DepartmentApplication {
 
   public static void main(String[] args) /*throws SQLException*/ {
     SpringApplication.run(DepartmentApplication.class, args);
+    try {
+      // The newInstance() call is a work around for some
+      // broken Java implementations
+
+      Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+    } catch (Exception ex) {
+      // handle the error
+    }
 /*
     Connection connection = DriverManager.getConnection(URL, NAME, PASSWORD);
     connection.prepareStatement(

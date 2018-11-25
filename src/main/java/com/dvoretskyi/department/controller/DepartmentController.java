@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * The type Department controller.
  */
-/*@Controller*/
+//@RestController
 
 public class DepartmentController {
 

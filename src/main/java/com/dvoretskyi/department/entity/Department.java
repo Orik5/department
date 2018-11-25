@@ -1,7 +1,6 @@
 package com.dvoretskyi.department.entity;
 
 import java.util.List;
-import javax.persistence.Entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,7 +9,7 @@ import lombok.ToString;
 /**
  * The type Department.
  */
-@Entity
+
 @Getter
 @Setter
 @ToString
@@ -18,11 +17,12 @@ import lombok.ToString;
 
 //@Table(name = "tblDepartments")
 public class Department {
+
   //@Id
   //@GeneratedValue(strategy = GenerationType.IDENTITY)
- // @Column(name = "dpID")
+  // @Column(name = "dpID")
   private long id;
-// @Column(name = "dpName", nullable = false, length = 25)
+  // @Column(name = "dpName", nullable = false, length = 25)
   private String name;
 
   //@OneToMany(fetch = FetchType.LAZY, mappedBy = "department", cascade = CascadeType.ALL)

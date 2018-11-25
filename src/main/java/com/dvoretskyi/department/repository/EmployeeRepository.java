@@ -2,8 +2,6 @@ package com.dvoretskyi.department.repository;
 
 import com.dvoretskyi.department.entity.Employee;
 import java.util.List;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 /**
  * The interface Employee repository.
@@ -13,7 +11,7 @@ public interface EmployeeRepository /*extends JpaRepository<Employee, Long>*/ {
 
   List<Employee> findAllEmployees();
 
-  Employee findEmployeeByIdById(long id);
+  Employee findEmployeeById(long id);
 
   void addEmployee(Employee employee);
 
@@ -21,6 +19,6 @@ public interface EmployeeRepository /*extends JpaRepository<Employee, Long>*/ {
 
   void deleteEmployeeById(long id);
 
-  @Query(value = "select n from Employee n where n.name like :name%")
-  List<Employee> findByName(@Param("name") String name);
+ /* @Query(value = "select n from Employee n where n.name like :name%")
+  List<Employee> findByName(@Param("name") String name);*/
 }

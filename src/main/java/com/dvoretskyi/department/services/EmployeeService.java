@@ -1,5 +1,6 @@
 package com.dvoretskyi.department.services;
 
+import com.dvoretskyi.department.dto.EmployeeDto;
 import com.dvoretskyi.department.entity.Employee;
 import java.util.List;
 
@@ -38,8 +39,8 @@ public interface EmployeeService {
 
 
   void saveEmployee(Employee employee);
-  List<Employee> findAllEmployees();
-
+ // List<Employee> findAllEmployees();
+  List<EmployeeDto> findAllEmployees();
 //  List<Employee> findByName(String name);
 
   void editEmployee(long id, Employee employee);

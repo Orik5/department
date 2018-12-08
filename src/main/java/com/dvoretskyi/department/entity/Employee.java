@@ -37,4 +37,11 @@ public class Employee {
     this.active = active;
     this.department = department;
   }
+  public static Employee create(String name, boolean active,Department department) {
+    Employee employee = new Employee();
+    employee.setName(name);
+    employee.setActive(active);
+   // employee.setDepartment(department.getId());
+    return employee;
+  }
 }

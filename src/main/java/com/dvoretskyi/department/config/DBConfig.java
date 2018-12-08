@@ -13,28 +13,51 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+/**
+ * The type Db config.
+ */
 @Configuration
 @EnableTransactionManagement
 @PropertySource("classpath:database.properties")
 public class DBConfig {
-	@Autowired
-    private Environment env;
-    @Bean(destroyMethod = "")
-	public DataSource getDataSource() {
-	    BasicDataSource dataSource = new BasicDataSource();
-	    dataSource.setDriverClassName(env.getProperty("database.driverClassName"));
-	    dataSource.setUrl(env.getProperty("database.url"));
-	    dataSource.setUsername(env.getProperty("database.username"));
-	    dataSource.setPassword(env.getProperty("database.password"));
-	    return dataSource;
-	}
-	@Bean
-	public JdbcTemplate jdbcTemplate() {
-		return new JdbcTemplate(getDataSource());
-	}
-	@Bean(name="transactionManager")
-	public PlatformTransactionManager txManager() {
-		DataSourceTransactionManager transactionManager = new DataSourceTransactionManager(getDataSource());
-	    return transactionManager;
-	}	
+
+  @Autowired
+  private Environment env;
+
+  /**
+   * Gets data source.
+   *
+   * @return the data source
+   */
+  @Bean(destroyMethod = "")
+  public DataSource getDataSource() {
+    BasicDataSource dataSource = new BasicDataSource();
+    dataSource.setDriverClassName(env.getProperty("database.driverClassName"));
+    dataSource.setUrl(env.getProperty("database.url"));
+    dataSource.setUsername(env.getProperty("database.username"));
+    dataSource.setPassword(env.getProperty("database.password"));
+    return dataSource;
+  }
+
+  /**
+   * Jdbc template jdbc template.
+   *
+   * @return the jdbc template
+   */
+  @Bean
+  public JdbcTemplate jdbcTemplate() {
+    return new JdbcTemplate(getDataSource());
+  }
+
+  /**
+   * Tx manager platform transaction manager.
+   *
+   * @return the platform transaction manager
+   */
+  @Bean(name = "transactionManager")
+  public PlatformTransactionManager txManager() {
+    DataSourceTransactionManager transactionManager = new DataSourceTransactionManager(
+        getDataSource());
+    return transactionManager;
+  }
 }

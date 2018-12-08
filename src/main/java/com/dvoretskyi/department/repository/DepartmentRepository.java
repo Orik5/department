@@ -3,11 +3,8 @@ package com.dvoretskyi.department.repository;
 import com.dvoretskyi.department.entity.Department;
 import java.util.List;
 
-/**
- * The interface Department repository.
- */
-//@Repository
-public interface DepartmentRepository /*extends JpaRepository<Department, Long> */ {
+
+public interface DepartmentRepository {
 
   List<Department> findAllDepartmentds();
 

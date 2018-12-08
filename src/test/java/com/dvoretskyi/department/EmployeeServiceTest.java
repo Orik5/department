@@ -21,7 +21,7 @@ public class EmployeeServiceTest {
 
  /* @Test
   public void testAddEmployee_returnsNewEmployee() {
-    when(employeeRepository.save(any(Employee.class))).thenReturn(new Employee());
+    when(employeeRepository.addEmployee(any(Employee.class));).thenReturn(new Employee());
     Employee employee = new Employee();
     assertThat(employeeService.saveEmployee(), is(notNullValue()));
   }*/

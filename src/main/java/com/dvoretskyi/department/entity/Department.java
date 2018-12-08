@@ -31,4 +31,11 @@ public class Department {
   public Department(String name) {
     this.name = name;
   }
+
+  public static Department create(String name) {
+    Department department = new Department();
+    department.setName(name);
+
+    return department;
+  }
 }

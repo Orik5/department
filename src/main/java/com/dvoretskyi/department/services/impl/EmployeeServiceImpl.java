@@ -1,8 +1,10 @@
 package com.dvoretskyi.department.services.impl;
 
+import com.dvoretskyi.department.dto.EmployeeDto;
 import com.dvoretskyi.department.entity.Employee;
 import com.dvoretskyi.department.repository.EmployeeRepository;
 import com.dvoretskyi.department.services.EmployeeService;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,11 +45,19 @@ public class EmployeeServiceImpl implements EmployeeService {
     employeeRepository.addEmployee(employee);
   }
 
-  @Override
+/*  @Override
   public List<Employee> findAllEmployees() {
     return employeeRepository.findAllEmployees();
-  }
+  }*/
+@Override
+public List<EmployeeDto> findAllEmployees() {
+  List<EmployeeDto> employeeDtos= new ArrayList<>();
+  List<Employee> employees=employeeRepository.findAllEmployees();
+  for(Employee employee:employees){
+    employeeDtos.add(EmployeeDto.convertToDto(employee));  }
 
+  return employeeDtos;
+}
 /*  @Override
   public List<Employee> findByName(String name) {
     return employeeRepository.findByName(name);

@@ -3,13 +3,20 @@ package com.dvoretskyi.department.repository.impl;
 import com.dvoretskyi.department.entity.Employee;
 import com.dvoretskyi.department.entity.mapper.EmployeeRowMapper;
 import com.dvoretskyi.department.repository.EmployeeRepository;
+import com.google.common.collect.Lists;
 import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import javax.persistence.QueryHint;
+import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
 @Transactional
 @Repository
 
@@ -18,9 +25,23 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
   @Autowired
   private JdbcTemplate jdbcTemplate;
 
+  private DataSource dataSource;
+  //@Autowired
+  //private EntityManager entityManager;
+
+  @Autowired
+  public void setDataSource(DataSource dataSource) {
+    this.dataSource = dataSource;
+  }
+
+  @PostConstruct
+  public void postConstruct() {
+    jdbcTemplate = new JdbcTemplate(dataSource);
+  }
+
   @Override
   public List<Employee> findAllEmployees() {
-    String sql = "SELECT id, name, active ,department FROM employee";
+    String sql = "SELECT employee_id, employee_name,active FROM employee";
     //RowMapper<Article> rowMapper = new BeanPropertyRowMapper<Article>(Article.class);
     RowMapper<Employee> rowMapper = new EmployeeRowMapper();
     return this.jdbcTemplate.query(sql, rowMapper);
@@ -28,7 +49,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
   @Override
   public Employee findEmployeeById(long id) {
-    String sql = "SELECT  id, name,  FROM employee WHERE id = ?";
+    String sql = "SELECT  employee_id, employee_name,  FROM employee WHERE employee_id = ?";
     RowMapper<Employee> rowMapper = new BeanPropertyRowMapper(Employee.class);
     Employee employee = jdbcTemplate.queryForObject(sql, rowMapper, id);
     return employee;
@@ -36,15 +57,15 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
   @Override
   public void addEmployee(Employee employee) {
-    String sql = "INSERT INTO employee (id,name,active,department) values (?,?,?,?)";
-    jdbcTemplate.update(sql, employee.getId(), employee.getName(), employee.getActive(),
-        employee.getDepartment());
+    String sql = "INSERT INTO employee (employee_id,employee_name,active) values (?,?,?)";
+    jdbcTemplate.update(sql, employee.getId(), employee.getName(), employee.getActive()/*,
+        employee.getDepartment()*/);
 
     //Fetch article id
-    sql = "SELECT id FROM employee WHERE name = ? and active=? and department=?";
+    sql = "SELECT employee_id FROM employee WHERE employee_name = ?/* and active=? and department=?*/";
     int id = jdbcTemplate
-        .queryForObject(sql, Integer.class, employee.getName(), employee.getActive(),
-            employee.getDepartment());
+        .queryForObject(sql, Integer.class, employee.getName(), employee.getActive()/*,
+            employee.getDepartment()*/);
 
     //Set article id
     employee.setId(id);
@@ -52,13 +73,13 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
   @Override
   public void updateEmployee(Employee employee) {
-    String sql = "UPDATE employee SET name=?,active=? WHERE id=?";
-    jdbcTemplate.update(sql, employee.getId(), employee.getName(), employee.getActive());
+    String sql = "UPDATE employee SET employee_name=?/*,active=?*/ WHERE employee_id=?";
+    jdbcTemplate.update(sql, employee.getId(), employee.getName()/*, employee.getActive()*/);
   }
 
   @Override
   public void deleteEmployeeById(long id) {
-    String sql = "DELETE FROM articles WHERE articleId=?";
+    String sql = "DELETE FROM employee WHERE employee_id=?";
     jdbcTemplate.update(sql, id);
   }
 
@@ -70,4 +91,39 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     return this.jdbcTemplate.query(sql, rowMapper);*//*
     return null;
   }*/
+
+  public JdbcTemplate getJdbcTemplate() {
+    return jdbcTemplate;
+  }
+
+/*  private Employee toEmployee(ResultSet resultSet) throws SQLException {
+    Employee employee = new Employee();
+    employee.setId(resultSet.getLong("ID"));
+    employee.setName(resultSet.getString("FIRST_NAME"));
+    employee.setActive(resultSet.getBoolean(1));
+
+    return employee;
+  }*/
+
+
+ /* @SuppressWarnings("unchecked")
+  @Override
+  public List<Employee> findPagedResultByEmployeeId(long id, int offset, int limit) {
+    String query = "select s.* from Employee s "
+        + "join somethingelse selse on selse.id = s.fk_somethingelse "
+        + "where selse.id = :id";
+    //+ "order by selse.date";
+    Query nativeQuery = entityManager.createNativeQuery(query);
+    nativeQuery.setParameter("id", id);
+    //Paginering
+    nativeQuery.setFirstResult(offset);
+    nativeQuery.setMaxResults(limit);
+    final List<Object[]> resultList = nativeQuery.getResultList();
+    List<Employee> employeeList = Lists.newArrayList();
+    resultList
+        .forEach(object -> employeeList.add(new Employee("Olaf", true)*//*map obj to something*//*));
+    return employeeList;
+  }*/
+
+
 }

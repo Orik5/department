@@ -38,7 +38,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
   @Override
   public List<Employee> findAllEmployees() {
     String sql = "SELECT employee_id, employee_name,active FROM employee";
-   //RowMapper<Employee> rowMapper = new BeanPropertyRowMapper<Employee>(Employee.class);
+    //RowMapper<Employee> rowMapper = new BeanPropertyRowMapper<Employee>(Employee.class);
     RowMapper<Employee> rowMapper = new EmployeeRowMapper();
     return this.jdbcTemplate.query(sql, rowMapper);
   }
@@ -47,15 +47,15 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
   public Employee findEmployeeById(long id) {
     String sql = "SELECT  employee_id, employee_name,  FROM employee WHERE employee_id = ?";
     RowMapper<Employee> rowMapper = new BeanPropertyRowMapper(Employee.class);
-    Employee employee = jdbcTemplate.queryForObject(sql, rowMapper, id);
-    return employee;
+    return this.jdbcTemplate.queryForObject(sql, rowMapper, id);
+    // return employee;
   }
 
   @Override
-  public void addEmployee(Employee employee) {
-    String sql = "INSERT INTO employee (employee_id,employee_name,active) values (?,?,?)";
-    jdbcTemplate.update(sql, employee.getId(), employee.getName(), employee.getActive()/*,
-        employee.getDepartment()*/);
+  public Employee addEmployee(Employee employee) {
+    String sql = "INSERT INTO employee (employee_id,employee_name,active,FK_Employee_department) values (?,?,?,?)";
+    jdbcTemplate.update(sql, employee.getId(), employee.getName(), employee.getActive(),
+        employee.getDepartment());
 
     //Fetch employee id
     sql = "SELECT employee_id FROM employee WHERE employee_name = ? and active=? /*and department=?*/";
@@ -65,18 +65,21 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
     //Set employee id
     employee.setId(id);
+    return employee;
   }
 
   @Override
-  public void updateEmployee(Employee employee) {
+  public Employee updateEmployee(Employee employee) {
     String sql = "UPDATE employee SET employee_name=?/*,active=?*/ WHERE employee_id=?";
     jdbcTemplate.update(sql, employee.getId(), employee.getName()/*, employee.getActive()*/);
+    return employee;
   }
 
   @Override
   public void deleteEmployeeById(long id) {
     String sql = "DELETE FROM employee WHERE employee_id=?";
     jdbcTemplate.update(sql, id);
+
   }
 
 /*  @Override

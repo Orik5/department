@@ -26,8 +26,7 @@ public interface EmployeeService {
 
   /*  Department findEmployeeByName(String name);*/
 
-
- // Employee saveEmployee(String empName, Boolean empActive, Department department);
+  // Employee saveEmployee(String empName, Boolean empActive, Department department);
 
 
   /**
@@ -37,12 +36,12 @@ public interface EmployeeService {
    */
 
 
+  Employee saveEmployee(Employee employee);
 
-  void saveEmployee(Employee employee);
- // List<Employee> findAllEmployees();
+  // List<Employee> findAllEmployees();
   List<EmployeeDto> findAllEmployees();
 //  List<Employee> findByName(String name);
 
-  void editEmployee(long id, Employee employee);
+  Employee editEmployee(long id, Employee employee);
 
 }

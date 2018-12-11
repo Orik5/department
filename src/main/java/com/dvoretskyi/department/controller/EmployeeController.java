@@ -8,15 +8,12 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import java.util.List;
-import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.config.EnableHypermediaSupport;
 import org.springframework.hateoas.config.EnableHypermediaSupport.HypermediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -60,16 +57,19 @@ public class EmployeeController {
   @ApiOperation(value = "Add employee")
   @RequestMapping(value = "/employees", method = RequestMethod.POST, produces = {
       "application/hal+json"})
-  public void addEmployee(
-      Employee employee/*String empName, Boolean empActive, Department department*/) {
-    employeeService.saveEmployee(employee/*empName, empActive, department*/);
-  }
+  /*public void addEmployee(Employee employee) {
 
+    employeeService.saveEmployee(employee);
+  }*/
+  public  EmployeeDto addEmployee(Employee employee){
+     return EmployeeDto.convertToDto(employeeService.saveEmployee(employee));
+  }
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
   @ApiOperation(value = "Update employee")
   @RequestMapping(value = "/employees{id}", method = RequestMethod.PUT, produces = {
       "application/hal+json"})
-  public ResponseEntity<Object> updateEmployee(@RequestBody Employee employee,
+ /* public ResponseEntity<Object> updateEmployee(@RequestBody Employee employee,
       @PathVariable long id) {
 
     Optional<Employee> employeeOptional = Optional.ofNullable(employeeService.findEmployeeById(id));
@@ -83,6 +83,9 @@ public class EmployeeController {
     employeeService.editEmployee(id, employee);
 
     return ResponseEntity.noContent().build();
+  }*/
+ public EmployeeDto updateEmployee(@PathVariable("id") long id,Employee employee){
+   return EmployeeDto.convertToDto(employeeService.editEmployee(id,employee));
   }
 
 

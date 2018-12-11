@@ -30,46 +30,47 @@ public class EmployeeServiceImpl implements EmployeeService {
     employeeRepository.deleteEmployeeById(id);
   }
 
- /* @Override
-  public Employee saveEmployee(String empName, Boolean empActive, Department department) {
-    if (department == null || department.toString().equals("")) {
-      return employeeRepository.save(new Employee(empName, empActive));
-    } else {
-      return employeeRepository.save(new Employee(empName, empActive, department));
-    }
-  }
-*/
+  /* @Override
+   public Employee saveEmployee(String empName, Boolean empActive, Department department) {
+     if (department == null || department.toString().equals("")) {
+       return employeeRepository.save(new Employee(empName, empActive));
+     } else {
+       return employeeRepository.save(new Employee(empName, empActive, department));
+     }
+   }
+ */
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   @Override
-  public void saveEmployee(Employee employee) {
-    employeeRepository.addEmployee(employee);
+  public Employee saveEmployee(Employee employee) {
+    return employeeRepository.addEmployee(employee);
   }
 
-/*  @Override
-  public List<Employee> findAllEmployees() {
-    return employeeRepository.findAllEmployees();
-  }*/
-@Override
-public List<EmployeeDto> findAllEmployees() {
-  List<EmployeeDto> employeeDtos= new ArrayList<>();
-  List<Employee> employees=employeeRepository.findAllEmployees();
-  for(Employee employee:employees){
-    employeeDtos.add(EmployeeDto.convertToDto(employee));  }
+  /*  @Override
+    public List<Employee> findAllEmployees() {
+      return employeeRepository.findAllEmployees();
+    }*/
+  @Override
+  public List<EmployeeDto> findAllEmployees() {
+    List<EmployeeDto> employeeDtos = new ArrayList<>();
+    List<Employee> employees = employeeRepository.findAllEmployees();
+    for (Employee employee : employees) {
+      employeeDtos.add(EmployeeDto.convertToDto(employee));
+    }
 
-  return employeeDtos;
-}
+    return employeeDtos;
+  }
 /*  @Override
   public List<Employee> findByName(String name) {
     return employeeRepository.findByName(name);
   }*/
 
   @Override
-  public void editEmployee(long id, Employee employee) {
+  public Employee editEmployee(long id, Employee employee) {
     Employee changedEmployee = findEmployeeById(id);
     changedEmployee.setActive(employee.getActive());
     changedEmployee.setName(employee.getName());
     changedEmployee.setDepartment(employee.getDepartment());
-    employeeRepository.addEmployee(changedEmployee);
+    return employeeRepository.addEmployee(changedEmployee);
   }
 
 

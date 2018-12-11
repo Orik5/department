@@ -9,13 +9,13 @@ public interface EmployeeRepository {
 
   Employee findEmployeeById(long id);
 
-  void addEmployee(Employee employee);
+  Employee addEmployee(Employee employee);
 
-  void updateEmployee(Employee employee);
+  Employee updateEmployee(Employee employee);
 
   void deleteEmployeeById(long id);
 
- // List<Employee> findPagedResultByEmployeeId(long id, int offset, int limit);
+  // List<Employee> findPagedResultByEmployeeId(long id, int offset, int limit);
  /* @Query(value = "select n from Employee n where n.name like :name%")
   List<Employee> findByName(@Param("name") String name);*/
 }

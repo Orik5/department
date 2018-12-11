@@ -16,15 +16,19 @@ CREATE TABLE IF NOT EXISTS `employee` (
   active      boolean      default 1/*,
 
   PRIMARY KEY (employee_id)*/
-  ,CONSTRAINT FK_Employee_department FOREIGN KEY (employee_id)
+  /*,CONSTRAINT FK_Employee_department FOREIGN KEY (employee_id)
 REFERENCES department_employee1.department (department_id)
   ON DELETE NO ACTION
-  ON UPDATE CASCADE
+  ON UPDATE CASCADE*/
 )
 
   ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
 -- Dumping data for table concretepage.articles
+alter table `department_employee1`.employee
+  ADD  COLUMN FK_Emp_DP BIGINT (1),add CONSTRAINT FK_Employee_department FOREIGN KEY (employee_id)
+REFERENCES department_employee1.department (department_id)   ON DELETE NO ACTION
+  ON UPDATE CASCADE;
 INSERT INTO `employee` (employee_id, employee_name, active) VALUES
-  (1, 'Java Concurrency', 1),
-  (2, 'Spring Boot Getting Started', 1);
+  (1, 'Java Concurrency'),
+  (2, 'Spring Boot Getting Started');

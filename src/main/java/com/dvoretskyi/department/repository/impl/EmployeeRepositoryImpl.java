@@ -3,12 +3,8 @@ package com.dvoretskyi.department.repository.impl;
 import com.dvoretskyi.department.entity.Employee;
 import com.dvoretskyi.department.entity.mapper.EmployeeRowMapper;
 import com.dvoretskyi.department.repository.EmployeeRepository;
-import com.google.common.collect.Lists;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-import javax.persistence.QueryHint;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -42,7 +38,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
   @Override
   public List<Employee> findAllEmployees() {
     String sql = "SELECT employee_id, employee_name,active FROM employee";
-    //RowMapper<Article> rowMapper = new BeanPropertyRowMapper<Article>(Article.class);
+   //RowMapper<Employee> rowMapper = new BeanPropertyRowMapper<Employee>(Employee.class);
     RowMapper<Employee> rowMapper = new EmployeeRowMapper();
     return this.jdbcTemplate.query(sql, rowMapper);
   }
@@ -61,13 +57,13 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     jdbcTemplate.update(sql, employee.getId(), employee.getName(), employee.getActive()/*,
         employee.getDepartment()*/);
 
-    //Fetch article id
-    sql = "SELECT employee_id FROM employee WHERE employee_name = ?/* and active=? and department=?*/";
+    //Fetch employee id
+    sql = "SELECT employee_id FROM employee WHERE employee_name = ? and active=? /*and department=?*/";
     int id = jdbcTemplate
         .queryForObject(sql, Integer.class, employee.getName(), employee.getActive()/*,
             employee.getDepartment()*/);
 
-    //Set article id
+    //Set employee id
     employee.setId(id);
   }
 

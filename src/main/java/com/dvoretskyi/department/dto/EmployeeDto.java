@@ -20,6 +20,8 @@ import org.springframework.hateoas.ResourceSupport;
 public class EmployeeDto extends ResourceSupport {
 
 
+
+ // private long id;
   private String name;
   private Boolean active;
   private Department department;
@@ -34,6 +36,7 @@ public class EmployeeDto extends ResourceSupport {
    */
   public EmployeeDto(String name, Boolean active,
       Department department) {
+
     this.name = name;
     this.active = active;
     this.department = department;

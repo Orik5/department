@@ -1,5 +1,6 @@
 package com.dvoretskyi.department;
 
+import java.sql.SQLException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
@@ -11,12 +12,12 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 
 public class DepartmentApplication {
 
- /* public final static String URL = "jdbc:mysql://localhost:3306/employee_department?createDatabaseIfNotExist=true";
+  /*public final static String URL = "jdbc:mysql://localhost:3306/employee_department?createDatabaseIfNotExist=true";
   public final static String NAME = "root";
   public final static String PASSWORD = "golovach";*/
 
 
-  public static void main(String[] args) /*throws SQLException*/ {
+  public static void main(String[] args) throws SQLException /*throws SQLException*/ {
     SpringApplication.run(DepartmentApplication.class, args);
   /*  try {
       // The newInstance() call is a work around for some
@@ -26,16 +27,20 @@ public class DepartmentApplication {
     } catch (Exception ex) {
       // handle the error
     }*/
-/*
-    Connection connection = DriverManager.getConnection(URL, NAME, PASSWORD);
+//) ,name VARCHAR(55))");*//*
+   /* Connection connection = DriverManager.getConnection(URL, NAME, PASSWORD);
     connection.prepareStatement(
-        "CREATE TABLE if NOT EXISTS employee(id int primary key auto_increment(employee_id), name VARCHAR(55), surname VARCHAR(55)),active BIT(1),FOREIGN KEY (department_id),REFERENCES department(department_id);")
+        "CREATE TABLE if NOT EXISTS employee(id int primary key auto_increment(employee_id),"
+            + " name VARCHAR(55), active booleandefault 1,"
+            + "FOREIGN KEY (department_id),REFERENCES department(department_id);")
         .execute();
 
     connection.close();
     connection.prepareStatement(
-        "CREATE TABLE if NOT EXISTS department(id int primary key auto_increment(department_id) ,name VARCHAR(55))");*/
+        "CREATE TABLE IF NOT EXISTS `department` (  department_id   bigint(5) NOT NULL AUTO_INCREMENT,"
+            + "department_name varchar(200) NOT NULL, PRIMARY KEY (department_id));")
+        .execute();
+  }*/
+
   }
-
-
 }

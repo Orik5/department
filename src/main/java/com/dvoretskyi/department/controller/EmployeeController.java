@@ -48,7 +48,7 @@ public class EmployeeController {
 
   }
 
-  @ApiOperation(value = "Search employee by Id", response = Employee.class)
+  @ApiOperation(value = "Search employee by Id", response = EmployeeDto.class)
   @RequestMapping(value = "/employees{id}", method = RequestMethod.GET, produces = {
       "application/hal+json"})
   public EmployeeDto getEmployee(@PathVariable("id") long id) {
@@ -56,7 +56,7 @@ public class EmployeeController {
     return EmployeeDto.convertToDto(
         employeeService.findEmployeeById(id)); /*employeeService.findEmployeeById(id);*/
   }
-
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   @ApiOperation(value = "Add employee")
   @RequestMapping(value = "/employees", method = RequestMethod.POST, produces = {
       "application/hal+json"})

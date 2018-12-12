@@ -59,6 +59,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     return employeeDtos;
   }
+
+/*  @Override
+  public Employee editEmployee(long id, Employee employee) {
+    Employee changedEmployee = findEmployeeById(id);
+    return null;
+  }*/
 /*  @Override
   public List<Employee> findByName(String name) {
     return employeeRepository.findByName(name);
@@ -72,7 +78,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     changedEmployee.setDepartment(employee.getDepartment());
     return employeeRepository.addEmployee(changedEmployee);
   }
-
 
 /*  public Page<Employee> findPaginated(Pageable pageable) {
     int pageSize = pageable.getPageSize();

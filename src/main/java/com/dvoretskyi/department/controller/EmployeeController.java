@@ -66,7 +66,7 @@ public class EmployeeController {
   }
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-  @ApiOperation(value = "Update employee",response = EmployeeDto.class)
+  @ApiOperation(value = "Update employee"/*,response = EmployeeDto.class*/)
   @RequestMapping(value = "/employees{id}", method = RequestMethod.PUT, produces = {
       "application/hal+json"})
  /* public ResponseEntity<Object> updateEmployee(@RequestBody Employee employee,

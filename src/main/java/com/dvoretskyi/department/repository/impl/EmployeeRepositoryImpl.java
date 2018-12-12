@@ -72,7 +72,10 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
   public Employee updateEmployee(Employee employee) {
     String sql = "UPDATE employee SET employee_name=? and active=? and FK_Emp_DP WHERE employee_id=?";
     jdbcTemplate.update(sql, employee.getId(), employee.getName(), employee.getActive());
-    return employee;
+
+    RowMapper<Employee> rowMapper = new BeanPropertyRowMapper(Employee.class);
+    return this.jdbcTemplate.queryForObject(sql, rowMapper,employee);
+   // return employee;
   }
 
   @Override

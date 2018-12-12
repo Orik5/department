@@ -53,12 +53,12 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
   @Override
   public Employee addEmployee(Employee employee) {
-    String sql = "INSERT INTO employee(employee_id,employee_name,active,FK_Emp_DP) values (? ,?,?,?)";
+    String sql = "INSERT INTO employee(employee_id,employee_name,active,FK_Emp_DP) values (?,?,?,?)";
     jdbcTemplate.update(sql, employee.getId(), employee.getName(), employee.getActive(),
         employee.getDepartment());
 
     //Fetch employee id
-    sql = "SELECT employee_id FROM employee WHERE employee_name = ? and active=? and department=?";
+    sql = "SELECT employee_id FROM employee WHERE employee_name = ? and active=? and FK_Emp_DP=?";
     int id = jdbcTemplate
         .queryForObject(sql, Integer.class, employee.getName(), employee.getActive(),
             employee.getDepartment());

@@ -37,7 +37,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
   @Override
   public List<Employee> findAllEmployees() {
-    String sql = "SELECT employee_id, employee_name,active FROM employee";
+    String sql = "SELECT employee_id, employee_name,active,FK_Emp_DP FROM employee";
     //RowMapper<Employee> rowMapper = new BeanPropertyRowMapper<Employee>(Employee.class);
     RowMapper<Employee> rowMapper = new EmployeeRowMapper();
     return this.jdbcTemplate.query(sql, rowMapper);
@@ -53,9 +53,9 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
   @Override
   public Employee addEmployee(Employee employee) {
-    String sql = "INSERT INTO employee (employee_id,employee_name,active,FK_Employee_department) values (?,?,?,?)";
-    jdbcTemplate.update(sql, employee.getId(), employee.getName(), employee.getActive(),
-        employee.getDepartment());
+    String sql = "INSERT INTO employee(employee_id,employee_name,active/*,FK_Emp_DP*/) values (?,?,?)";
+    jdbcTemplate.update(sql, employee.getId(), employee.getName(), employee.getActive()/*,
+        employee.getDepartment()*/);
 
     //Fetch employee id
     sql = "SELECT employee_id FROM employee WHERE employee_name = ? and active=? /*and department=?*/";

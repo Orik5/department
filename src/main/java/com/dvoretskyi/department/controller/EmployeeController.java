@@ -84,7 +84,7 @@ public class EmployeeController {
 
     return ResponseEntity.noContent().build();
   }*/
- public EmployeeDto updateEmployee(@PathVariable("id") long id,Employee employee){
+ public EmployeeDto updateEmployee( long id,Employee employee){
    return EmployeeDto.convertToDto(employeeService.editEmployee(id,employee));
   }
 

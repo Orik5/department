@@ -1,6 +1,5 @@
 package com.dvoretskyi.department.dto;
 
-import com.dvoretskyi.department.entity.Department;
 import com.dvoretskyi.department.entity.Employee;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -24,7 +23,7 @@ public class EmployeeDto extends ResourceSupport {
  // private long id;
   private String name;
   private Boolean active;
-  private Department department;
+  private long department;
 
 
   /**
@@ -35,7 +34,7 @@ public class EmployeeDto extends ResourceSupport {
    * @param department the department
    */
   public EmployeeDto(String name, Boolean active,
-      Department department) {
+      long department) {
 
     this.name = name;
     this.active = active;

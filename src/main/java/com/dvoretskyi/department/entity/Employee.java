@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-
 @Getter
 @Setter
 @ToString
@@ -25,23 +24,24 @@ public class Employee {
 
  //@ManyToOne(fetch = FetchType.EAGER)
  //@JoinColumn(name = "emp_dpID", referencedColumnName = "dpID")
-  private Department department;
+  private long department;
 
   public Employee(String name, boolean active) {
     this.name = name;
     this.active = active;
   }
 
-  public Employee(String name, Boolean active, Department department) {
+  public Employee(String name, Boolean active, long department) {
     this.name = name;
     this.active = active;
     this.department = department;
   }
-  public static Employee create(String name, boolean active,Department department) {
+  public static Employee create(String name, boolean active,long department) {
     Employee employee = new Employee();
     employee.setName(name);
     employee.setActive(active);
-   // employee.setDepartment(department.getId());
+    employee.setDepartment(department);
+   //employee.setDepartment(department.getId());
     return employee;
   }
 }

@@ -1,11 +1,9 @@
 package com.dvoretskyi.department.config;
 
-import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-
 /**
  * The type Web app initializer.
  */
-public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class WebAppInitializer {/*extends AbstractAnnotationConfigDispatcherServletInitializer {
 
   @Override
   protected Class<?>[] getRootConfigClasses() {
@@ -20,5 +18,5 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
   @Override
   protected String[] getServletMappings() {
     return new String[]{"/"};
-  }
+  }*/
 }

@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
-@Api(value = "department")
+@Api(value = "departmentproject")
 @EnableHypermediaSupport(type = HypermediaType.HAL)
 public class EmployeeController {
 
@@ -54,7 +54,7 @@ public class EmployeeController {
         employeeService.findEmployeeById(id)); /*employeeService.findEmployeeById(id);*/
   }
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  @ApiOperation(value = "Add employee")
+  @ApiOperation(value = "Add employee"/*,response = EmployeeDto.class*/)
   @RequestMapping(value = "/employees", method = RequestMethod.POST, produces = {
       "application/hal+json"})
   /*public void addEmployee(Employee employee) {
@@ -66,7 +66,7 @@ public class EmployeeController {
   }
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-  @ApiOperation(value = "Update employee")
+  @ApiOperation(value = "Update employee",response = EmployeeDto.class)
   @RequestMapping(value = "/employees{id}", method = RequestMethod.PUT, produces = {
       "application/hal+json"})
  /* public ResponseEntity<Object> updateEmployee(@RequestBody Employee employee,

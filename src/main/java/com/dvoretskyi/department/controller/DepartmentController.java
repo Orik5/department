@@ -1,8 +1,10 @@
 package com.dvoretskyi.department.controller;
 
 import com.dvoretskyi.department.entity.Department;
-import com.dvoretskyi.department.services.DepartmentService;
+import com.dvoretskyi.department.services.impl.DepartmentServiceImpl;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,12 +18,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * The type Department controller.
  */
-@RestController
+//@RestController
 @RequestMapping("/api")
 @Api(value = "department")
 @EnableHypermediaSupport(type = HypermediaType.HAL)
@@ -30,14 +31,22 @@ public class DepartmentController {
 
   public static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
   @Autowired
-  private DepartmentService departmentService;
+  private DepartmentServiceImpl departmentService;
+  @ApiResponses(value = {
+      @ApiResponse(code = 200, message = "Successfully l list"),
+      @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+      @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+      @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+  }
+  )
+
 
   /**
    * Gets add department page.
    *
    * @return the add department page
    */
-  @GetMapping("/departments")
+  @RequestMapping("/departments")
   public String getAddDepartmentPage() {
     return "/addDepartment";
   }

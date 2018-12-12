@@ -2,8 +2,13 @@ package com.dvoretskyi.department.controller;
 
 import com.dvoretskyi.department.entity.Department;
 import com.dvoretskyi.department.services.DepartmentService;
+import io.swagger.annotations.Api;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.config.EnableHypermediaSupport;
+import org.springframework.hateoas.config.EnableHypermediaSupport.HypermediaType;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,14 +16,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * The type Department controller.
  */
-//@RestController
+@RestController
+@RequestMapping("/api")
+@Api(value = "department")
+@EnableHypermediaSupport(type = HypermediaType.HAL)
 
 public class DepartmentController {
 
+  public static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
   @Autowired
   private DepartmentService departmentService;
 
@@ -91,7 +101,7 @@ public class DepartmentController {
   }*/
   @RequestMapping(value = "/departments", method = RequestMethod.POST)
   public void addDepartment(Department department) {
-     departmentService.saveDepartment(department);
+    departmentService.saveDepartment(department);
   }
 
 

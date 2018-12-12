@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface DepartmentRepository {
 
-  List<Department> findAllDepartmentds();
+  List<Department> findAllDepartments();
 
   Department findDepartmentById(long id);
 

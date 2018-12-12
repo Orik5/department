@@ -9,25 +9,20 @@ import java.util.List;
  */
 public interface EmployeeService {
 
-  /**
-   * Find employee by id employee.
-   *
-   * @param id the id
-   * @return the employee
-   */
+
   Employee findEmployeeById(long id);
 
-  /**
-   * Delete employee by id.
-   *
-   * @param id the id
-   */
-  void deleteEmployeeById(long id);
 
+  Employee saveEmployee(Employee employee);
+
+  List<EmployeeDto> findAllEmployees();
+
+  Employee editEmployee(long id, Employee employee);
+
+  void deleteEmployeeById(long id);
   /*  Department findEmployeeByName(String name);*/
 
   // Employee saveEmployee(String empName, Boolean empActive, Department department);
-
 
   /**
    * Find all employees list.
@@ -35,13 +30,9 @@ public interface EmployeeService {
    * @return the list
    */
 
-
-  Employee saveEmployee(Employee employee);
-
   // List<Employee> findAllEmployees();
-  List<EmployeeDto> findAllEmployees();
+
 //  List<Employee> findByName(String name);
 
-  Employee editEmployee(long id, Employee employee);
 
 }

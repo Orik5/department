@@ -33,13 +33,13 @@ public class EmployeeController {
       @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
       @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
       @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
-  }
+    }
   )
 
   @ApiOperation(value = "View a list of employees", response = Iterable.class)
   @RequestMapping(value = "/employees", method = RequestMethod.GET, produces = {
       "application/hal+json"})
-  public List<EmployeeDto> getAllEmployees() {
+   public List<EmployeeDto> getAllEmployees() {
     return employeeService.findAllEmployees();
 
 
@@ -61,7 +61,7 @@ public class EmployeeController {
 
     employeeService.saveEmployee(employee);
   }*/
-  public  EmployeeDto addEmployee(Employee employee){
+  public  EmployeeDto addEmployee(  Employee employee){
      return EmployeeDto.convertToDto(employeeService.saveEmployee(employee));
   }
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -84,7 +84,7 @@ public class EmployeeController {
 
     return ResponseEntity.noContent().build();
   }*/
- public EmployeeDto updateEmployee( long id,Employee employee){
+ public EmployeeDto updateEmployee(@PathVariable long id,Employee employee){
    return EmployeeDto.convertToDto(employeeService.editEmployee(id,employee));
   }
 

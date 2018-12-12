@@ -11,8 +11,8 @@ public class DepartmentRowMapper implements RowMapper<Department> {
   public Department mapRow(ResultSet row, int rowNum) throws SQLException {
     Department department = new Department();
 
-    department.setId(row.getInt("id"));
-    department.setName(row.getString("name"));
+    department.setId(row.getInt("department_id"));
+    department.setName(row.getString("department_name"));
     return department;
   }
 }

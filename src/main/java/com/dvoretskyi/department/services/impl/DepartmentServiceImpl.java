@@ -54,6 +54,6 @@ public class DepartmentServiceImpl implements DepartmentService {
   }*/
  @Override
  public List<Department> findAllDepartments() {
-  return departmentRepository.findAllDepartmentds();
+  return departmentRepository.findAllDepartments();
  }
 }

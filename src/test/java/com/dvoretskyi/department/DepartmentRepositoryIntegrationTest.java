@@ -1,7 +1,11 @@
 package com.dvoretskyi.department;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
+import com.dvoretskyi.department.entity.Employee;
 import com.dvoretskyi.department.repository.impl.DepartmentRepositoryImpl;
 import com.dvoretskyi.department.repository.impl.EmployeeRepositoryImpl;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
@@ -17,11 +21,11 @@ public class DepartmentRepositoryIntegrationTest {
   @Autowired
   private EmployeeRepositoryImpl employeeRepository;
 
- /* @Test
+  @Test
   public void whenInvalidId_thenReturnNull() {
-    Human fromDb = humanRepository.findById((long) -111).orElse(null);
+    Employee fromDb = employeeRepository.findEmployeeById((long) -111);
     assertThat(fromDb).isNull();
-  }*/
+  }
 
 /*  @Test
   public void whenInvalidName_thenReturnNull() {

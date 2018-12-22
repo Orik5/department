@@ -17,7 +17,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class AppConfig implements WebMvcConfigurer {
   @Value("${origin-url:http://localhost:4200}")
   private String originURL;
-
   @Override
   public void addCorsMappings(CorsRegistry registry) {
     registry.addMapping("/api/**").allowedOrigins(originURL)

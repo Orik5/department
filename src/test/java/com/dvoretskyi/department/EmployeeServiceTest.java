@@ -1,6 +1,6 @@
 package com.dvoretskyi.department;
 
-import com.dvoretskyi.department.repository.EmployeeRepository;
+import com.dvoretskyi.department.repository.impl.EmployeeRepositoryImpl;
 import com.dvoretskyi.department.services.impl.EmployeeServiceImpl;
 import org.junit.Before;
 import org.mockito.InjectMocks;
@@ -10,7 +10,7 @@ import org.mockito.MockitoAnnotations;
 public class EmployeeServiceTest {
 
   @Mock
-  private EmployeeRepository employeeRepository;
+  private EmployeeRepositoryImpl employeeRepository;
   @InjectMocks
   private EmployeeServiceImpl employeeService;
 
@@ -19,12 +19,15 @@ public class EmployeeServiceTest {
     MockitoAnnotations.initMocks(this);
   }
 
- /* @Test
-  public void testAddEmployee_returnsNewEmployee() {
-    when(employeeRepository.addEmployee(any(Employee.class));).thenReturn(new Employee());
-    Employee employee = new Employee();
-    assertThat(employeeService.saveEmployee(), is(notNullValue()));
-  }*/
+
+
+//
+//  @Test
+//  public void testAddEmployee_returnsNewEmployee() {
+//    when(employeeRepository.addEmployee(any(Employee.class))).thenReturn(new Employee());
+//    Employee employee = new Employee();
+//    assertThat(employeeService.saveEmployee(), is(notNullValue()));
+//  }
 
   //Using Answer to set an id to the customer which is passed in as a parameter to the mock method.
 

@@ -39,6 +39,7 @@ public class EmployeeController {
   @ApiOperation(value = "View a list of employees", response = Iterable.class)
   @RequestMapping(value = "/employees", method = RequestMethod.GET, produces = {
       "application/hal+json"})
+  //@CrossOrigin(origins = "http://localhost:4200")
    public List<EmployeeDto> getAllEmployees() {
     return employeeService.findAllEmployees();
 
@@ -48,6 +49,7 @@ public class EmployeeController {
   @ApiOperation(value = "Search employee by Id", response = EmployeeDto.class)
   @RequestMapping(value = "/employees{id}", method = RequestMethod.GET, produces = {
       "application/hal+json"})
+  //@CrossOrigin(origins = "http://localhost:4200")
   public EmployeeDto getEmployee(@PathVariable("id") long id) {
 
     return EmployeeDto.convertToDto(
@@ -57,6 +59,7 @@ public class EmployeeController {
   @ApiOperation(value = "Add employee"/*,response = EmployeeDto.class*/)
   @RequestMapping(value = "/employees", method = RequestMethod.POST, produces = {
       "application/hal+json"})
+  //@CrossOrigin(origins = "http://localhost:4200")
   /*public void addEmployee(Employee employee) {
 
     employeeService.saveEmployee(employee);
@@ -84,6 +87,7 @@ public class EmployeeController {
 
     return ResponseEntity.noContent().build();
   }*/
+  //@CrossOrigin(origins = "http://localhost:4200")
  public EmployeeDto updateEmployee(@PathVariable long id,Employee employee){
    return EmployeeDto.convertToDto(employeeService.editEmployee(id,employee));
   }
@@ -92,6 +96,7 @@ public class EmployeeController {
   @ApiOperation(value = "Delete employee")
   @RequestMapping(value = "/employees/{id}", method = RequestMethod.DELETE, produces = {
       "application/hal+json"})
+  //@CrossOrigin(origins = "http://localhost:4200")
   public void deleteEmployee(@PathVariable long id) {
     employeeService.deleteEmployeeById(id);
 

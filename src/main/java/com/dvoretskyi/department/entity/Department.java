@@ -15,17 +15,10 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 
-//@Table(name = "tblDepartments")
 public class Department {
 
-  //@Id
-  //@GeneratedValue(strategy = GenerationType.IDENTITY)
-  // @Column(name = "dpID")
   private long id;
-  // @Column(name = "dpName", nullable = false, length = 25)
   private String name;
-
-  //@OneToMany(fetch = FetchType.LAZY, mappedBy = "department", cascade = CascadeType.ALL)
   private List<Employee> employee;
 
   public Department(String name) {
@@ -38,4 +31,5 @@ public class Department {
 
     return department;
   }
+
 }

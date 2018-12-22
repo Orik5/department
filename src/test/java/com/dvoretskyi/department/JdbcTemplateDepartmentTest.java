@@ -1,7 +1,7 @@
 package com.dvoretskyi.department;
 
 import com.dvoretskyi.department.entity.Department;
-import com.dvoretskyi.department.exception.JdbcTemplateDepartment;
+import com.dvoretskyi.department.repository.impl.DepartmentRepositoryImpl;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
@@ -10,9 +10,9 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
-public class JdbcTamplateDepartment {
+public class JdbcTemplateDepartmentTest {
 
-  private JdbcTemplateDepartment jdbcTemplateDepartment;
+  private DepartmentRepositoryImpl departmentRepository = new DepartmentRepositoryImpl();
 
   @Before
   public void setup2() {
@@ -20,22 +20,21 @@ public class JdbcTamplateDepartment {
         .setType(EmbeddedDatabaseType.H2)
         .addScript("department.sql")
         .build();
-    jdbcTemplateDepartment = new JdbcTemplateDepartment();
-    jdbcTemplateDepartment.setDataSource(db);
-    jdbcTemplateDepartment.postConstruct();
+    departmentRepository = new DepartmentRepositoryImpl();
+    departmentRepository.setDataSource(db);
+    departmentRepository.postConstruct();
   }
 
   @Test
   public void testJdbcTemplate() {
     Department department = Department.create("HR");
-    jdbcTemplateDepartment.save(department);
-    List<Department> departments = jdbcTemplateDepartment.loadAll();
-    System.out.println("Loaded Persons: " + jdbcTemplateDepartment);
+    departmentRepository.addDepartment(department);
+    List<Department> departments = departmentRepository.findAllDepartments();
+    System.out.println("Loaded Persons: " + departmentRepository);
     for (Department department1 : departments) {
 
       Assert.assertTrue("HR".equals(department1.getName()));
 
     }
-
   }
 }

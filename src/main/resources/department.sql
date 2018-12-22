@@ -10,7 +10,7 @@ CREATE TABLE department (
   /*ENGINE = InnoDB
   DEFAULT CHARSET = latin1*/;
 
-INSERT INTO department ( department_name)VALUES('HR');
+/*INSERT INTO department ( department_name)VALUES('HR');*/
 
 
 CREATE TABLE employee (

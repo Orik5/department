@@ -1,8 +1,6 @@
 package com.dvoretskyi.department;
 
 import com.dvoretskyi.department.entity.Employee;
-import com.dvoretskyi.department.exception.JdbcTemplateDao;
-import com.dvoretskyi.department.repository.impl.DepartmentRepositoryImpl;
 import com.dvoretskyi.department.repository.impl.EmployeeRepositoryImpl;
 import java.util.List;
 import org.junit.Assert;
@@ -13,12 +11,10 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 
-public class JdbcTamplateTest {
+public class JdbcTemplateEmployeeTest {
 
   private EmployeeRepositoryImpl repository;
-  private DepartmentRepositoryImpl departmentRepositoryrepository;
 
-  private JdbcTemplateDao jdbcTemplateDao;
 
   @Before
   public void setup() {
@@ -28,7 +24,7 @@ public class JdbcTamplateTest {
         .build();
     repository = new EmployeeRepositoryImpl();
     repository.setDataSource(db);
-   repository.postConstruct();
+    repository.postConstruct();
   }
 
   @Test
@@ -39,7 +35,6 @@ public class JdbcTamplateTest {
     jdbcTemplateDepartment.save(department);*/
     // Department department =Department.create();
 
-
     List<Employee> employees = repository.findAllEmployees();
 
     System.out.println("Loaded Persons: " + employees);
@@ -47,16 +42,15 @@ public class JdbcTamplateTest {
     System.out.println("Loaded Persons: " + jdbcTemplateDepartment);*/
     for (Employee employee1 : employees) {
 
-      //Assert.assertTrue("2".equals(employee1.getId()));
+      //Assert.assertTrue("1".equals(employee1.getId()));
 
       Assert.assertTrue("Bob".equals(employee1.getName()));
+      //Assert.assertTrue(true);
+      Assert.assertNotNull(repository);
+      Assert.assertNotNull(employee1.getId());
+      Assert.assertNotNull(employee1.getDepartment());
     }
-   /* for (Department department1 : departments) {
 
-      Assert.assertTrue("HR".equals(department1.getName()));
-
-    }
-*/
 
   }
 

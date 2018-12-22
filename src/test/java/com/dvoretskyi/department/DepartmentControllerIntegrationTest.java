@@ -1,17 +1,13 @@
 package com.dvoretskyi.department;
 
 import static org.assertj.core.internal.bytebuddy.matcher.ElementMatchers.is;
-import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.dvoretskyi.department.controller.EmployeeController;
-import com.dvoretskyi.department.entity.Employee;
 import com.dvoretskyi.department.services.impl.EmployeeServiceImpl;
-import java.util.Arrays;
-import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +15,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.client.match.MockRestRequestMatchers;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultMatcher;
 
@@ -34,7 +29,7 @@ public class DepartmentControllerIntegrationTest {
   private EmployeeServiceImpl service;
 
  @Test
-  public void givenHuman_whenGetHumans_thenStatus200()
+  public void givenEmployee_whenGetEmployees_thenStatus200()
       throws Exception {
 
 
@@ -46,6 +41,7 @@ public class DepartmentControllerIntegrationTest {
         .andExpect((ResultMatcher) jsonPath("$[0].name", is("bob")));
   }
 
+/*
   @Test
   public void givenEmployees_whenGetEmployees_thenReturnJsonArray()
       throws Exception {
@@ -63,5 +59,6 @@ public class DepartmentControllerIntegrationTest {
             (ResultMatcher) MockRestRequestMatchers
                 .jsonPath("$[0].name", is(employee.getName())));
   }
+*/
 
 }

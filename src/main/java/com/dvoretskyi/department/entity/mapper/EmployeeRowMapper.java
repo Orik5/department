@@ -5,6 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 
+/**
+ * The type Employee row mapper.
+ */
 public class EmployeeRowMapper implements RowMapper<Employee> {
 
   @Override

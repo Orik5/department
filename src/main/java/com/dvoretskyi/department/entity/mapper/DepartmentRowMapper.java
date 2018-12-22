@@ -5,6 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 
+/**
+ * The type Department row mapper.
+ */
 public class DepartmentRowMapper implements RowMapper<Department> {
 
   @Override

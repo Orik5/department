@@ -33,7 +33,7 @@ public class Employee {
     employee.setName(name);
     employee.setActive(active);
     employee.setDepartment(department);
-    //employee.setDepartment(department.getId());
+
     return employee;
   }
 }

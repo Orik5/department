@@ -10,6 +10,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.hateoas.ResourceSupport;
 
+
 /**
  * The type Employee dto.
  */
@@ -22,26 +23,10 @@ import org.springframework.hateoas.ResourceSupport;
 public class EmployeeDto extends ResourceSupport {
 
 
-
   private String name;
   private Boolean active;
   private long department;
 
-
-  /**
-   * Instantiates a new Employee dto.
-   *
-   * @param name the name
-   * @param active the active
-   * @param department the department
-   */
- /* public EmployeeDto( String name, Boolean active,
-      long department) {
-
-    this.name = name;
-    this.active = active;
-    this.department = department;
-  }*/
 
   /**
    * Convert to dto employee dto.

@@ -7,8 +7,8 @@ CREATE TABLE department (
 
 
 );
-
-/*INSERT INTO department ( department_name)VALUES('HR');*/
+USE department_employee1;
+INSERT INTO department ( department_name)VALUES('HR');
 
 
 CREATE TABLE employee (
@@ -20,8 +20,8 @@ CREATE TABLE employee (
   CONSTRAINT FK_Employee_department FOREIGN KEY (FK_Emp_DP)
   REFERENCES department_employee1.department (department_id)
 );
-
-/*INSERT INTO `employee` (employee_name, active,FK_Emp_DP) VALUES
+USE department_employee1;
+INSERT INTO `employee` (employee_name, active,FK_Emp_DP) VALUES
   ( 'Harry',1,1),
   ( 'Bob',1,null);
-*/
+

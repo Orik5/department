@@ -32,6 +32,7 @@ public class DepartmentController {
   public static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
   @Autowired
   private DepartmentServiceImpl departmentService;
+
   @ApiResponses(value = {
       @ApiResponse(code = 200, message = "Successfully l list"),
       @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
@@ -39,7 +40,6 @@ public class DepartmentController {
       @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
   }
   )
-
 
   /**
    * Gets add department page.

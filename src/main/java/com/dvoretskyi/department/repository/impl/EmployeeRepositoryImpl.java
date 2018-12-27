@@ -1,6 +1,5 @@
 package com.dvoretskyi.department.repository.impl;
 
-import com.dvoretskyi.department.entity.Department;
 import com.dvoretskyi.department.entity.Employee;
 import com.dvoretskyi.department.entity.mapper.EmployeeRowMapper;
 import com.dvoretskyi.department.repository.EmployeeRepository;
@@ -111,8 +110,8 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
   @Override
   public List<Employee> findPagedResultByEmployeeId(long id, int offset, int limit) {
     String query = "select s.* from department_employee1 s. "
-        + "join department on department.id = s.FK_Empl_DP "
-        + "where department.id = :department_id";
+        + "join employee on employee.id = s.FK_Empl_DP "
+        + "where employee.id = :employee_id";
     //+ "order by selse.date";
     Query nativeQuery = entityManager.createNativeQuery(query);
     nativeQuery.setParameter("id", id);

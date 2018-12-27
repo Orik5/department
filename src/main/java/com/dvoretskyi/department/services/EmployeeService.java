@@ -24,14 +24,6 @@ public interface EmployeeService {
 
   // Employee saveEmployee(String empName, Boolean empActive, Department department);
 
-  /**
-   * Find all employees list.
-   *
-   * @return the list
-   */
-
-  // List<Employee> findAllEmployees();
-
 //  List<Employee> findByName(String name);
 
 

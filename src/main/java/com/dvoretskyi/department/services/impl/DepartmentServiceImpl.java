@@ -16,16 +16,16 @@ public class DepartmentServiceImpl implements DepartmentService {
   @Autowired
   private DepartmentRepository departmentRepository;
 
- /* @Override
+  /* @Override
+   public Department findDepartmentById(long id) {
+     return departmentRepository.findById(id).get();
+   }
+ */
+  @Override
   public Department findDepartmentById(long id) {
-    return departmentRepository.findById(id).get();
+    Department department = departmentRepository.findDepartmentById(id);
+    return department;
   }
-*/
- @Override
- public Department findDepartmentById(long id) {
-  Department department = departmentRepository.findDepartmentById(id);
-   return department;
- }
 /*
   @Override
   public void deleteDepartmentById(long id) {
@@ -36,24 +36,23 @@ public class DepartmentServiceImpl implements DepartmentService {
   public void deleteDepartmentById(long id) {
     departmentRepository.deleteDepartmentById(id);
   }
-/*  @Override
+/*  @Overridel
   public Department saveDepartment(Department department) {
     return departmentRepository.save(department);
   }*/
 
   @Override
   public void saveDepartment(Department department) {
-     departmentRepository.addDepartment(department);
+    departmentRepository.addDepartment(department);
   }
 
 
-
- /* @Override
+  /* @Override
+   public List<Department> findAllDepartments() {
+     return departmentRepository.findAll();
+   }*/
+  @Override
   public List<Department> findAllDepartments() {
-    return departmentRepository.findAll();
-  }*/
- @Override
- public List<Department> findAllDepartments() {
-  return departmentRepository.findAllDepartments();
- }
+    return departmentRepository.findAllDepartments();
+  }
 }

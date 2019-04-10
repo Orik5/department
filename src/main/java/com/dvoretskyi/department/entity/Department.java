@@ -9,10 +9,8 @@ import lombok.ToString;
 /**
  * The type Department.
  */
-@Getter
-@Setter
-@ToString
-@NoArgsConstructor
+
+
 
 public class Department {
 
@@ -20,7 +18,40 @@ public class Department {
   private String name;
   private List<Employee> employee;
 
-  /**
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Employee> getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(List<Employee> employee) {
+        this.employee = employee;
+    }
+
+    @Override
+    public String toString() {
+        return "Department{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", employee=" + employee +
+                '}';
+    }
+
+    /**
    * Instantiates a new Department.
    *
    * @param name the name
@@ -29,7 +60,10 @@ public class Department {
     this.name = name;
   }
 
-  /**
+    public Department() {
+    }
+
+    /**
    * Create department.
    *
    * @param name the name

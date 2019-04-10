@@ -1,4 +1,5 @@
-CREATE SCHEMA /*CREATE DATABASE*/ /*IF NOT EXISTS */department_employee1;
+CREATE SCHEMA --CREATE DATABASE
+IF NOT EXISTS department_employee1;
 USE department_employee1;
 -- Dumping structure for table concretepage.articles
 CREATE TABLE department (
@@ -21,7 +22,7 @@ CREATE TABLE employee (
   REFERENCES department_employee1.department (department_id)
 );
 USE department_employee1;
-INSERT INTO `employee` (employee_name, active,FK_Emp_DP) VALUES
+INSERT INTO `employee`(employee_name, active,FK_Emp_DP) VALUES
   ( 'Harry',1,1),
   ( 'Bob',1,null);
 

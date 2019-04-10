@@ -12,14 +12,26 @@ import org.springframework.hateoas.ResourceSupport;
 /**
  * The type Department dto.
  */
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+
 @JsonInclude(Include.NON_NULL)
 public class DepartmentDto extends ResourceSupport {
 
   private String name;
+
+  public String getName() {
+    return name;
+  }
+
+  public DepartmentDto(String name) {
+    this.name = name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public DepartmentDto() {
+  }
 
   /**
    * Convert to dto department dto.
@@ -29,5 +41,12 @@ public class DepartmentDto extends ResourceSupport {
    */
   public static DepartmentDto convertToDto(Department department) {
     return new DepartmentDto(department.getName());
+  }
+
+  @Override
+  public String toString() {
+    return "DepartmentDto{" +
+            "name='" + name + '\'' +
+            '}';
   }
 }

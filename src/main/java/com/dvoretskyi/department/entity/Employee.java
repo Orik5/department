@@ -8,7 +8,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
+
 
 public class Employee {
 
@@ -25,6 +25,41 @@ public class Employee {
   public Employee(String name, Boolean active, long department) {
     this.name = name;
     this.active = active;
+    this.department = department;
+  }
+
+  public Employee() {
+  }
+
+  public long getId() {
+    return id;
+  }
+
+  public void setId(long id) {
+    this.id = id;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public Boolean getActive() {
+    return active;
+  }
+
+  public void setActive(Boolean active) {
+    this.active = active;
+  }
+
+  public long getDepartment() {
+    return department;
+  }
+
+  public void setDepartment(long department) {
     this.department = department;
   }
 

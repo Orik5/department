@@ -14,11 +14,7 @@ import org.springframework.hateoas.ResourceSupport;
 /**
  * The type Employee dto.
  */
-@AllArgsConstructor
-@Setter
-@Getter
-@NoArgsConstructor
-@ToString
+
 @JsonInclude(Include.NON_NULL)
 public class EmployeeDto extends ResourceSupport {
 
@@ -27,6 +23,38 @@ public class EmployeeDto extends ResourceSupport {
   private Boolean active;
   private long department;
 
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public Boolean getActive() {
+    return active;
+  }
+
+  public void setActive(Boolean active) {
+    this.active = active;
+  }
+
+  public long getDepartment() {
+    return department;
+  }
+
+  public void setDepartment(long department) {
+    this.department = department;
+  }
+
+  public EmployeeDto() {
+  }
+
+  public EmployeeDto(String name, Boolean active, long department) {
+    this.name = name;
+    this.active = active;
+    this.department = department;
+  }
 
   /**
    * Convert to dto employee dto.

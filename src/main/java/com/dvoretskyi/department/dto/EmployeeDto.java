@@ -16,14 +16,23 @@ import org.springframework.hateoas.ResourceSupport;
  */
 
 @JsonInclude(Include.NON_NULL)
-public class EmployeeDto extends ResourceSupport {
+public class EmployeeDto  {
 
-
+  private  Long id;
   private String name;
   private Boolean active;
   private long department;
 
-  public String getName() {
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
     return name;
   }
 
@@ -50,20 +59,22 @@ public class EmployeeDto extends ResourceSupport {
   public EmployeeDto() {
   }
 
-  public EmployeeDto(String name, Boolean active, long department) {
-    this.name = name;
-    this.active = active;
-    this.department = department;
-  }
 
-  /**
+    public EmployeeDto(Long id, String name, Boolean active, long department) {
+        this.id = id;
+        this.name = name;
+        this.active = active;
+        this.department = department;
+    }
+
+    /**
    * Convert to dto employee dto.
    *
    * @param employee the employee
    * @return the employee dto
    */
   public static EmployeeDto convertToDto(Employee employee) {
-    return new EmployeeDto(employee.getName(), employee.getActive(),
+    return new EmployeeDto(employee.getId(),employee.getName(), employee.getActive(),
         employee.getDepartment());
 
   }

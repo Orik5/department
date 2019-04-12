@@ -13,7 +13,7 @@ public interface EmployeeRepository {
 
   Employee updateEmployee(Employee employee);
 
-  void deleteEmployeeById(long id);
+  Employee deleteEmployeeById(long id);
 
    List<Employee> findPagedResultByEmployeeId(long id, int offset, int limit);
  /* @Query(value = "select n from Employee n where n.name like :name%")

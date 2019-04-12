@@ -19,7 +19,7 @@ public interface EmployeeService {
 
   Employee editEmployee(long id, Employee employee);
 
-  void deleteEmployeeById(long id);
+  Employee deleteEmployeeById( long id);
   /*  Department findEmployeeByName(String name);*/
 
   // Employee saveEmployee(String empName, Boolean empActive, Department department);

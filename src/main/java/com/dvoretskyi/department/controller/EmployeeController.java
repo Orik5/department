@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-/*@RequestMapping("/api")*/
-@Api(value = "departmentproject")
+@RequestMapping("/department")
+@Api(value = "department")
 
 @EnableHypermediaSupport(type = HypermediaType.HAL)
 //@RequestMapping({"/employees"})
@@ -58,19 +58,21 @@ public class EmployeeController {
                 employeeService.findEmployeeById(id)); /*employeeService.findEmployeeById(id);*/
     }
 
-    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    @ApiOperation(value = "Add employee"/*,response = EmployeeDto.class*/)
+    @ApiOperation(value = "Add employee",response = EmployeeDto.class)
     @RequestMapping(value = "/employees", method = RequestMethod.POST, produces = {
             "application/hal+json"})
-    //@CrossOrigin(origins = "http://localhost:4200")
+
   /*public void addEmployee(Employee employee) {
 
     employeeService.saveEmployee(employee);
   }*/
-    public EmployeeDto addEmployee(Employee employee) {
+    public EmployeeDto addEmployee( @RequestBody Employee employee) {
         return EmployeeDto.convertToDto(employeeService.saveEmployee(employee));
     }
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+/*    public Employee addEmployee( Employee employee) {
+        return employeeService.saveEmployee(employee);
+    }*/
+
 
     @ApiOperation(value = "Update employee"/*,response = EmployeeDto.class*/)
     @RequestMapping(value = "/employees/{id}", method = RequestMethod.PUT, produces = {
@@ -98,14 +100,13 @@ public class EmployeeController {
 
     @ApiOperation(value = "Delete employee")
 
-    @RequestMapping(value = "employees/{id}", method = RequestMethod.DELETE, produces = {
+    @RequestMapping(value = "/employees/{id}", method = RequestMethod.DELETE, produces = {
             "application/hal+json"})
 
     //@CrossOrigin(origins = "http://localhost:4200")
     public EmployeeDto deleteEmployee(@PathVariable long id) {
 
-
-        return EmployeeDto.convertToDto(employeeService.deleteEmployeeById( id));
+        return EmployeeDto.convertToDto(employeeService.deleteEmployeeById(id));
 
     }
 

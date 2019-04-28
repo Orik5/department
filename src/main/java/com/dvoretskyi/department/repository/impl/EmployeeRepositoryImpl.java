@@ -22,7 +22,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-@Transactional
+//@Transactional
 @Repository
 @CrossOrigin(origins = "http://localhost:4200")
 
@@ -65,17 +65,19 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     public Employee addEmployee(Employee employee) {
         String sql = "INSERT INTO department_employee1.employee(employee_id,employee_name,active/*,FK_Emp_DP*/) values (?,?,?)";
         jdbcTemplate.update(sql, employee.getId(), employee.getName(), employee.getActive()
+
+
         /*,
         employee.getDepartment()*/);
 
         //Fetch employee id
-        sql = "SELECT employee_id FROM department_employee1.employee WHERE employee_name = ? and active=? /*and FK_Emp_DP=?*/";
-        int id = jdbcTemplate
-                .queryForObject(sql, Integer.class, employee.getName(), employee.getActive()/*,
-            employee.getDepartment()*/);
+      //  sql = "SELECT employee_id FROM department_employee1.employee WHERE employee_name = ? and active=? /*and FK_Emp_DP=?*/";
+  //     int id = jdbcTemplate
+  //              .queryForObject(sql, Integer.class, employee.getName(), employee.getActive()/*,
+ //           employee.getDepartment()*/);
 
         //Set employee id
-        // employee.setId(id);
+ //        employee.setId(id);
         return employee;
     }
 

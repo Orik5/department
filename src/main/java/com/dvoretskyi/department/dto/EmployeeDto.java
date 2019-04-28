@@ -79,5 +79,13 @@ public class EmployeeDto  {
 
   }
 
-
+  @Override
+  public String toString() {
+    return "EmployeeDto{" +
+            "id=" + id +
+            ", name='" + name + '\'' +
+            ", active=" + active +
+            ", department=" + department +
+            '}';
+  }
 }

@@ -5,9 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter
-@ToString
+
 
 
 public class Employee {
@@ -20,6 +18,16 @@ public class Employee {
   public Employee(String name, boolean active) {
     this.name = name;
     this.active = active;
+  }
+
+  @Override
+  public String toString() {
+    return "Employee{" +
+            "id=" + id +
+            ", name='" + name + '\'' +
+            ", active=" + active +
+            ", department=" + department +
+            '}';
   }
 
   public Employee(String name, Boolean active, long department) {

@@ -63,21 +63,22 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeDtos;
     }
 
-  /*  @Override
-  public List<Employee> findByName(String name) {
-    return employeeRepository.findByName(name);
-  }*/
+    /*  @Override
+    public List<Employee> findByName(String name) {
+      return employeeRepository.findByName(name);
+    }*/
 /*   @Override
     public Employee saveEmployee(Employee employee) {
         return employeeRepository.addEmployee(employee);
     }*/
     @Override
     public Employee editEmployee(Employee employee, long id) {
-        Employee changedEmployee = findEmployeeById(id);
+        /*Employee changedEmployee = findEmployeeById(id);
         changedEmployee.setActive(employee.getActive());
         changedEmployee.setName(employee.getName());
         changedEmployee.setDepartment(employee.getDepartment());
-        return employeeRepository.addEmployee(changedEmployee);
+        return employeeRepository.updateEmployee(changedEmployee, id);*/
+        return employeeRepository.updateEmployee(employee, id);
     }
 
 /*  public Page<Employee> findPaginated(Pageable pageable) {

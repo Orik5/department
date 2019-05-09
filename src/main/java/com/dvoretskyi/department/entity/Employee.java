@@ -9,9 +9,13 @@ public class Employee implements Serializable {
 
     private long id;
     private String name;
+    private String surname;
     private Boolean active;
     private long department;
     private String email;
+    private double salary;
+    private String phoneNumber;
+
 
     public Employee(String name, boolean active) {
         this.name = name;

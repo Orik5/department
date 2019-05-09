@@ -15,9 +15,11 @@ import javax.sql.DataSource;
 
 import org.hibernate.query.criteria.internal.predicate.NegatedPredicateWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -30,6 +32,8 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     private DataSource dataSource;
     //@Autowired
@@ -64,32 +68,63 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     @Override
     public Employee addEmployee(Employee employee) {
         String sql = "INSERT INTO department_employee1.employee(employee_id,employee_name,active/*,FK_Emp_DP*/) values (?,?,?)";
-        jdbcTemplate.update(sql, employee.getId(), employee.getName(), employee.getActive()
-
-
-        /*,
-        employee.getDepartment()*/);
+        jdbcTemplate.update(sql, employee.getId(), employee.getName(), employee.getActive() /*, employee.getDepartment()*/);
 
         //Fetch employee id
-      //  sql = "SELECT employee_id FROM department_employee1.employee WHERE employee_name = ? and active=? /*and FK_Emp_DP=?*/";
-  //     int id = jdbcTemplate
-  //              .queryForObject(sql, Integer.class, employee.getName(), employee.getActive()/*,
+        sql = "SELECT employee_id FROM department_employee1.employee WHERE employee_name = ? and active=? /*and FK_Emp_DP=?*/";
+        int id = jdbcTemplate
+                .queryForObject(sql, Integer.class, employee.getName(), employee.getActive()/*,
  //           employee.getDepartment()*/);
 
         //Set employee id
- //        employee.setId(id);
+        employee.setId(id);
         return employee;
     }
 
-    @Override
-    public Employee updateEmployee(Employee employee) {
-        String sql = "UPDATE department_employee1.employee SET employee_name=? and active=? and FK_Emp_DP WHERE employee_id=?";
-        jdbcTemplate.update(sql, employee.getId(), employee.getName(),
-                employee.getActive(), employee.getDepartment());
 
-        RowMapper<Employee> rowMapper = new BeanPropertyRowMapper(Employee.class);
-        return this.jdbcTemplate.queryForObject(sql, rowMapper, employee);
-        // return employee;
+    /*
+    public void addDashboard(DynamicDashboard dynamicDashboard) {
+        String sql = "INSERT INTO dynamic_dashboard "
+                + "(DASHBOARD_NAME, HTML_CONTENT,SCRIPT_CONTENT,RULE_CONTENT) VALUES (?, ?, ?,?)";
+
+        try {
+            jdbcTemplate = new JdbcTemplate(dataSource);
+
+            jdbcTemplate.update(sql,
+                    new Object[] { dynamicDashboard.getDashboardName(), dynamicDashboard.getHtmlContent(),
+                            dynamicDashboard.getScriptContent(), dynamicDashboard});
+        } catch (Exception ex) {
+            logger.error(ex.getMessage());
+        }
+ public void addDashboard(DynamicDashboard dynamicDashboard) {
+        String sql = "INSERT INTO dynamic_dashboard "
+                + "(DASHBOARD_NAME, HTML_CONTENT,SCRIPT_CONTENT,RULE_CONTENT) VALUES (?, ?, ?,?)";
+
+        try {
+            jdbcTemplate = new JdbcTemplate(dataSource);
+
+            jdbcTemplate.update(sql,
+                    new Object[] { dynamicDashboard.getDashboardName(), dynamicDashboard.getHtmlContent(),
+                            dynamicDashboard.getScriptContent(), dynamicDashboard.getRuleContent()});
+        } catch (Exception ex) {
+            logger.error(ex.getMessage());
+        }
+
+    *
+    * */
+    @Override
+    public Employee updateEmployee(Employee employee, long id) {
+        String sql = "UPDATE department_employee1.employee SET employee_name=? , active=? /*and FK_Emp_DP */WHERE employee_id=?";
+        try {
+            jdbcTemplate.update(sql, new Object[]{employee.getName(),
+                    employee.getActive(), employee.getId()}/*, employee.getDepartment()*/);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // RowMapper<Employee> rowMapper = new BeanPropertyRowMapper(Employee.class);
+        //  return this.jdbcTemplate.queryForObject(sql, rowMapper, employee);
+        return employee;
     }
 
     @Override
@@ -98,8 +133,8 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         String sql = "DELETE FROM department_employee1.employee WHERE employee_id=?";
         jdbcTemplate.update(sql, id);
 
-       // RowMapper<Employee> rowMapper = new BeanPropertyRowMapper(Employee.class);
-        return  employee;
+        // RowMapper<Employee> rowMapper = new BeanPropertyRowMapper(Employee.class);
+        return employee;
     }
 
 /*  @Override

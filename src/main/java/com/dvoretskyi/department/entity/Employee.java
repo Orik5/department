@@ -1,82 +1,80 @@
 package com.dvoretskyi.department.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+
+import java.io.Serializable;
 
 
+public class Employee implements Serializable {
 
+    private long id;
+    private String name;
+    private Boolean active;
+    private long department;
+    private String email;
 
-public class Employee {
+    public Employee(String name, boolean active) {
+        this.name = name;
+        this.active = active;
+    }
 
-  private long id;
-  private String name;
-  private Boolean active;
-  private long department;
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", active=" + active +
+                ", department=" + department +
+                '}';
+    }
 
-  public Employee(String name, boolean active) {
-    this.name = name;
-    this.active = active;
-  }
+    public Employee(String name, Boolean active, long department) {
+        this.name = name;
+        this.active = active;
+        this.department = department;
+    }
 
-  @Override
-  public String toString() {
-    return "Employee{" +
-            "id=" + id +
-            ", name='" + name + '\'' +
-            ", active=" + active +
-            ", department=" + department +
-            '}';
-  }
+    public Employee() {
+    }
 
-  public Employee(String name, Boolean active, long department) {
-    this.name = name;
-    this.active = active;
-    this.department = department;
-  }
+    public long getId() {
+        return id;
+    }
 
-  public Employee() {
-  }
+    public void setId(long id) {
+        this.id = id;
+    }
 
-  public long getId() {
-    return id;
-  }
+    public String getName() {
+        return name;
+    }
 
-  public void setId(long id) {
-    this.id = id;
-  }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-  public String getName() {
-    return name;
-  }
+    public Boolean getActive() {
+        return active;
+    }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
 
-  public Boolean getActive() {
-    return active;
-  }
+    public long getDepartment() {
+        return department;
+    }
 
-  public void setActive(Boolean active) {
-    this.active = active;
-  }
+    public void setDepartment(long department) {
+        this.department = department;
+    }
 
-  public long getDepartment() {
-    return department;
-  }
+    public static Employee create(String name, boolean active, long department) {
+        Employee employee = new Employee();
+        employee.setName(name);
+        employee.setActive(active);
+        employee.setDepartment(department);
 
-  public void setDepartment(long department) {
-    this.department = department;
-  }
-
-  public static Employee create(String name, boolean active, long department) {
-    Employee employee = new Employee();
-    employee.setName(name);
-    employee.setActive(active);
-    employee.setDepartment(department);
-
-    return employee;
-  }
+        return employee;
+    }
 }

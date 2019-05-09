@@ -28,7 +28,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    //@Transactional
     public Employee deleteEmployeeById(long id) {
         Employee employee = employeeRepository.deleteEmployeeById(id);
         return employee;
@@ -64,18 +63,16 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeDtos;
     }
 
-/*  @Override
-  public Employee editEmployee(long id, Employee employee) {
-    Employee changedEmployee = findEmployeeById(id);
-    return null;
-  }*/
-/*  @Override
+  /*  @Override
   public List<Employee> findByName(String name) {
     return employeeRepository.findByName(name);
   }*/
-
+/*   @Override
+    public Employee saveEmployee(Employee employee) {
+        return employeeRepository.addEmployee(employee);
+    }*/
     @Override
-    public Employee editEmployee(long id, Employee employee) {
+    public Employee editEmployee(Employee employee, long id) {
         Employee changedEmployee = findEmployeeById(id);
         changedEmployee.setActive(employee.getActive());
         changedEmployee.setName(employee.getName());

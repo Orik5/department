@@ -58,25 +58,30 @@ public class EmployeeController {
                 employeeService.findEmployeeById(id)); /*employeeService.findEmployeeById(id);*/
     }
 
-    @ApiOperation(value = "Add employee",response = EmployeeDto.class)
+    @ApiOperation(value = "Add employee", response = EmployeeDto.class)
     @RequestMapping(value = "/employees", method = RequestMethod.POST, produces = {
             "application/hal+json"})
-
+    public EmployeeDto addEmployee(@RequestBody Employee employee) {
+        return EmployeeDto.convertToDto(employeeService.saveEmployee(employee));
+    }
   /*public void addEmployee(Employee employee) {
 
     employeeService.saveEmployee(employee);
   }*/
-    public EmployeeDto addEmployee( @RequestBody Employee employee) {
-        return EmployeeDto.convertToDto(employeeService.saveEmployee(employee));
-    }
+
 /*    public Employee addEmployee( Employee employee) {
         return employeeService.saveEmployee(employee);
     }*/
 
 
-    @ApiOperation(value = "Update employee"/*,response = EmployeeDto.class*/)
+    @ApiOperation(value = "Update employee", response = EmployeeDto.class)
     @RequestMapping(value = "/employees/{id}", method = RequestMethod.PUT, produces = {
             "application/hal+json"})
+
+    public EmployeeDto updateEmployee( @RequestBody Employee employee,@PathVariable long id) {
+        return EmployeeDto.convertToDto(employeeService.editEmployee( employee,id));
+    }
+
  /* public ResponseEntity<Object> updateEmployee(@RequestBody Employee employee,
       @PathVariable long id) {
 
@@ -93,9 +98,6 @@ public class EmployeeController {
     return ResponseEntity.noContent().build();
   }*/
     //@CrossOrigin(origins = "http://localhost:4200")
-    public EmployeeDto updateEmployee(@PathVariable long id, Employee employee) {
-        return EmployeeDto.convertToDto(employeeService.editEmployee(id, employee));
-    }
 
 
     @ApiOperation(value = "Delete employee")

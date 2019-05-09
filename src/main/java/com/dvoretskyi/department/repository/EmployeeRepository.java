@@ -11,7 +11,7 @@ public interface EmployeeRepository {
 
   Employee addEmployee(Employee employee);
 
-  Employee updateEmployee(Employee employee);
+  Employee updateEmployee(Employee employee,long id);
 
   Employee deleteEmployeeById(long id);
 

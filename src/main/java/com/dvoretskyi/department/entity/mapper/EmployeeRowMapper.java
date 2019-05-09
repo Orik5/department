@@ -18,7 +18,7 @@ public class EmployeeRowMapper implements RowMapper<Employee> {
     employee.setId(row.getLong("employee_id"));
     employee.setName(row.getString("employee_name"));
     employee.setActive(row.getBoolean("active"));
-    employee.setDepartment(row.getLong("FK_Emp_DP"));
+  //  employee.setDepartment(row.getLong("FK_Emp_DP"));
 
     return employee;
 

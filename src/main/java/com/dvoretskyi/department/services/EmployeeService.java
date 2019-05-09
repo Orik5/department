@@ -17,7 +17,7 @@ public interface EmployeeService {
 
   List<EmployeeDto> findAllEmployees();
 
-  Employee editEmployee(long id, Employee employee);
+  Employee editEmployee(Employee employee,long id);
 
   Employee deleteEmployeeById( long id);
   /*  Department findEmployeeByName(String name);*/

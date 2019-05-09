@@ -1,10 +1,6 @@
 package com.dvoretskyi.department.entity;
 
-import java.util.List;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import java.util.TreeSet;
 
 /**
  * The type Department.
@@ -16,7 +12,7 @@ public class Department {
 
   private long id;
   private String name;
-  private List<Employee> employee;
+  private TreeSet<Employee> employee;
 
     public long getId() {
         return id;
@@ -34,11 +30,11 @@ public class Department {
         this.name = name;
     }
 
-    public List<Employee> getEmployee() {
+    public TreeSet<Employee> getEmployee() {
         return employee;
     }
 
-    public void setEmployee(List<Employee> employee) {
+    public void setEmployee(TreeSet<Employee> employee) {
         this.employee = employee;
     }
 

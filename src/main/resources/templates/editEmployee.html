@@ -11,7 +11,7 @@
 <body>
 <table style="width: 70%">
   <div>
-    <form action="/editEmployee" method="post">
+    <form action="/department/employees/" >
       <input name="id" type="number" th:value="${employee.id}" hidden>
       <label for="empName">empName</label>
       <input name="empName" id="empName" type="text" th:placeholder="${employee.name}">

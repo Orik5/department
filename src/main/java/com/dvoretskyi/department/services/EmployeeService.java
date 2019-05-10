@@ -2,6 +2,7 @@ package com.dvoretskyi.department.services;
 
 import com.dvoretskyi.department.dto.EmployeeDto;
 import com.dvoretskyi.department.entity.Employee;
+
 import java.util.List;
 
 /**
@@ -10,19 +11,19 @@ import java.util.List;
 public interface EmployeeService {
 
 
-  Employee findEmployeeById(long id);
+    Employee findEmployeeById(long id);
 
 
-  Employee saveEmployee(Employee employee);
+    Employee saveEmployee(Employee employee);
 
-  List<EmployeeDto> findAllEmployees();
+    List<EmployeeDto> findAllEmployees();
 
-  Employee editEmployee(Employee employee,long id);
+    Employee editEmployee(Employee employee, long id);
 
-  Employee deleteEmployeeById( long id);
-  /*  Department findEmployeeByName(String name);*/
+    Employee deleteEmployeeById(long id);
+    /*  Department findEmployeeByName(String name);*/
 
-  // Employee saveEmployee(String empName, Boolean empActive, Department department);
+    // Employee saveEmployee(String empName, Boolean empActive, Department department);
 
 //  List<Employee> findByName(String name);
 

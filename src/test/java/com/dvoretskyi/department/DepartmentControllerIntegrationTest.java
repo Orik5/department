@@ -57,7 +57,7 @@ public class DepartmentControllerIntegrationTest {
         .andExpect((ResultMatcher) MockRestRequestMatchers.jsonPath("$", hasSize(1)))
         .andExpect(
             (ResultMatcher) MockRestRequestMatchers
-                .jsonPath("$[0].name", is(employee.getName())));
+                .jsonPath("$[0].name", is(employee.getFirstName())));
   }
 */
 

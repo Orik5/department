@@ -52,10 +52,10 @@ public class EmployeeController {
     @RequestMapping(value = "/employees/{id}", method = RequestMethod.GET, produces = {
             "application/hal+json"})
     //@CrossOrigin(origins = "http://localhost:4200")
-    public EmployeeDto getEmployee(@PathVariable("id") long id) {
+    public EmployeeDto getEmployee(@PathVariable long id) {
 
         return EmployeeDto.convertToDto(
-                employeeService.findEmployeeById(id)); /*employeeService.findEmployeeById(id);*/
+                employeeService.findEmployeeById(id));
     }
 
     @ApiOperation(value = "Add employee", response = EmployeeDto.class)

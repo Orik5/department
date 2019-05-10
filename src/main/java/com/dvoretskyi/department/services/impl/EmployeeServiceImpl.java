@@ -2,7 +2,6 @@ package com.dvoretskyi.department.services.impl;
 
 import com.dvoretskyi.department.dto.EmployeeDto;
 import com.dvoretskyi.department.entity.Employee;
-import com.dvoretskyi.department.repository.EmployeeRepository;
 import com.dvoretskyi.department.repository.impl.EmployeeRepositoryImpl;
 import com.dvoretskyi.department.services.EmployeeService;
 
@@ -33,16 +32,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employee;
     }
 
-    /* @Override
-     public Employee saveEmployee(String empName, Boolean empActive, Department department) {
-       if (department == null || department.toString().equals("")) {
-         return employeeRepository.save(new Employee(empName, empActive));
-       } else {
-         return employeeRepository.save(new Employee(empName, empActive, department));
-       }
-     }
-   */
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     @Override
     public Employee saveEmployee(Employee employee) {
         return employeeRepository.addEmployee(employee);
@@ -73,27 +62,30 @@ public class EmployeeServiceImpl implements EmployeeService {
     }*/
     @Override
     public Employee editEmployee(Employee employee, long id) {
-        /*Employee changedEmployee = findEmployeeById(id);
-        changedEmployee.setActive(employee.getActive());
-        changedEmployee.setName(employee.getName());
-        changedEmployee.setDepartment(employee.getDepartment());
-        return employeeRepository.updateEmployee(changedEmployee, id);*/
         return employeeRepository.updateEmployee(employee, id);
     }
 
-/*  public Page<Employee> findPaginated(Pageable pageable) {
-    int pageSize = pageable.getPageSize();
-    int currentPage = pageable.getPageNumber();
-    int startItem = currentPage * pageSize;
-    List<Employee> list;
-    if (findAllEmployees().size() < startItem) {
-      list = Collections.emptyList();
-    } else {
-      int toIndex = Math.min(startItem + pageSize, findAllEmployees().size());
-      list = findAllEmployees().subList(startItem, toIndex);
+    /*  public Page<Employee> findPaginated(Pageable pageable) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<Employee> list;
+        if (findAllEmployees().size() < startItem) {
+          list = Collections.emptyList();
+        } else {
+          int toIndex = Math.min(startItem + pageSize, findAllEmployees().size());
+          list = findAllEmployees().subList(startItem, toIndex);
+        }
+        Page<Employee> bookPage = new PageImpl<>(list, PageRequest.of(currentPage, pageSize),
+            findAllEmployees().size());
+        return bookPage;
+      }*/
+    public static Employee create(String firstName, boolean active, long department) {
+        Employee employee = new Employee();
+        employee.setFirstName(firstName);
+        employee.setActive(active);
+        employee.setDepartment(department);
+
+        return employee;
     }
-    Page<Employee> bookPage = new PageImpl<>(list, PageRequest.of(currentPage, pageSize),
-        findAllEmployees().size());
-    return bookPage;
-  }*/
 }

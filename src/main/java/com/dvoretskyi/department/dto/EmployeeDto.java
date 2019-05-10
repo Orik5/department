@@ -3,12 +3,8 @@ package com.dvoretskyi.department.dto;
 import com.dvoretskyi.department.entity.Employee;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import org.springframework.hateoas.ResourceSupport;
+
+import java.math.BigDecimal;
 
 
 /**
@@ -16,13 +12,19 @@ import org.springframework.hateoas.ResourceSupport;
  */
 
 @JsonInclude(Include.NON_NULL)
-public class EmployeeDto  {
+public class EmployeeDto {
 
-  private  Long id;
-  private String name;
-  private Boolean active;
-  private long department;
-
+    private Long id;
+    private String firstName;
+    private String surname;
+    private String middleName;
+    private String profession;
+    private String dateOfBirth;
+    private String phoneNumber;
+    private String email;
+    private BigDecimal salary;
+    private boolean active;
+    private Long department;
 
     public Long getId() {
         return id;
@@ -32,60 +34,132 @@ public class EmployeeDto  {
         this.id = id;
     }
 
-    public String getName() {
-    return name;
-  }
+    public String getFirstName() {
+        return firstName;
+    }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-  public Boolean getActive() {
-    return active;
-  }
+    public String getSurname() {
+        return surname;
+    }
 
-  public void setActive(Boolean active) {
-    this.active = active;
-  }
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
 
-  public long getDepartment() {
-    return department;
-  }
+    public String getMiddleName() {
+        return middleName;
+    }
 
-  public void setDepartment(long department) {
-    this.department = department;
-  }
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
 
-  public EmployeeDto() {
-  }
+    public String getProfession() {
+        return profession;
+    }
 
+    public void setProfession(String profession) {
+        this.profession = profession;
+    }
 
-    public EmployeeDto(Long id, String name, Boolean active, long department) {
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public BigDecimal getSalary() {
+        return salary;
+    }
+
+    public void setSalary(BigDecimal salary) {
+        this.salary = salary;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public Long getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Long department) {
+        this.department = department;
+    }
+
+    public EmployeeDto() {
+    }
+
+    public EmployeeDto(Long id, String firstName, String surname, String middleName,
+                       String profession, String dateOfBirth, String phoneNumber,
+                       String email, BigDecimal salary, Boolean active, Long department) {
         this.id = id;
-        this.name = name;
+        this.firstName = firstName;
+        this.surname = surname;
+        this.middleName = middleName;
+        this.profession = profession;
+        this.dateOfBirth = dateOfBirth;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.salary = salary;
         this.active = active;
         this.department = department;
     }
 
     /**
-   * Convert to dto employee dto.
-   *
-   * @param employee the employee
-   * @return the employee dto
-   */
-  public static EmployeeDto convertToDto(Employee employee) {
-    return new EmployeeDto(employee.getId(),employee.getName(), employee.getActive(),
-        employee.getDepartment());
+     * Convert to dto employee dto.
+     *
+     * @param employee the employee
+     * @return the employee dto
+     */
+    public static EmployeeDto convertToDto(Employee employee) {
+        return new EmployeeDto(employee.getId(), employee.getFirstName(), employee.getSurname(), employee.getMiddleName(),
+                employee.getProfession(), employee.getDateOfBirth(), employee.getPhoneNumber(), employee.getEmail(), employee.getSalary(), employee.getActive()
+                , employee.getDepartment());
 
-  }
+    }
 
-  @Override
-  public String toString() {
-    return "EmployeeDto{" +
-            "id=" + id +
-            ", name='" + name + '\'' +
-            ", active=" + active +
-            ", department=" + department +
-            '}';
-  }
+    @Override
+    public String toString() {
+        return "EmployeeDto{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", active=" + active +
+                ", department=" + department +
+                ", surname='" + surname + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", profession='" + profession + '\'' +
+                ", dateOfBirth='" + dateOfBirth + '\'' +
+                ", email='" + email + '\'' +
+                ", salary=" + salary +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                '}';
+    }
 }

@@ -12,10 +12,18 @@ USE department_employee1;
 INSERT INTO department ( department_name)VALUES('HR');
 
 
+USE department_employee1;
 CREATE TABLE employee (
-  employee_id   bigint(5) AUTO_INCREMENT primary key,
-  employee_name varchar(200),
-  active        boolean   default 1,
+  employee_id bigint(5) AUTO_INCREMENT primary key,
+  employee_first_name varchar(100),
+  employee_surname varchar (100),
+  employee_middle_name varchar (100),
+  employee_profession varchar (50),
+  employee_date_of_birth varchar (50),
+  employee_phone_number varchar (50),
+  employee_email varchar (50),
+  employee_salary decimal (50),
+  employee_active boolean   default 1,
 
   FK_Emp_DP     BIGINT(10),
   CONSTRAINT FK_Employee_department FOREIGN KEY (FK_Emp_DP)

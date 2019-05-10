@@ -15,7 +15,7 @@ public interface EmployeeRepository {
 
   Employee deleteEmployeeById(long id);
 
-   List<Employee> findPagedResultByEmployeeId(long id, int offset, int limit);
+  // List<Employee> findPagedResultByEmployeeId(long id, int offset, int limit);
  /* @Query(value = "select n from Employee n where n.name like :name%")
   List<Employee> findByName(@Param("name") String name);*/
 }

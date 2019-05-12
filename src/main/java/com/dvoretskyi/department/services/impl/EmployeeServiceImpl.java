@@ -7,6 +7,8 @@ import com.dvoretskyi.department.services.EmployeeService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -87,5 +89,23 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setDepartment(department);
 
         return employee;
+    }
+
+    public static String employeeRegex(String phoneNumber) {
+        Employee employee = new Employee();
+
+        phoneNumber = employee.getPhoneNumber();
+        //String phNumber = "123 123 1234";
+
+        Pattern pattern = Pattern.compile("\\d{3}-\\d{3}-\\d{4}");
+        Matcher matcher = pattern.matcher(phoneNumber);
+
+        if (matcher.matches()) {
+            System.out.println("Phone Number is Valid");
+        } else {
+            System.out
+                    .println("Phone Number isn't in this formate XXX-XXX-XXXX");
+        }
+        return phoneNumber;
     }
 }

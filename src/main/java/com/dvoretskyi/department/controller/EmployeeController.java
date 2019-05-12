@@ -1,6 +1,7 @@
 package com.dvoretskyi.department.controller;
 
 import com.dvoretskyi.department.dto.EmployeeDto;
+import com.dvoretskyi.department.entity.Admin;
 import com.dvoretskyi.department.entity.Employee;
 import com.dvoretskyi.department.services.impl.EmployeeServiceImpl;
 import io.swagger.annotations.Api;
@@ -8,7 +9,10 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+import java.security.Principal;
+import java.util.Base64;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,6 +41,21 @@ public class EmployeeController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     }
     )
+
+
+    @RequestMapping("/login")
+    public boolean login(@RequestBody Admin admin) {
+        return
+                admin.getAdminName().equals("admin") && admin.getPassword().equals("password");
+    }
+
+    @RequestMapping("/admin")
+    public Principal user(HttpServletRequest request) {
+        String authToken = request.getHeader("Authorization")
+                .substring("Basic".length()).trim();
+        return () -> new String(Base64.getDecoder()
+                .decode(authToken)).split(":")[0];
+    }
 
     @ApiOperation(value = "View a list of employees", response = Iterable.class)
     @RequestMapping(value = "/employees", method = RequestMethod.GET, produces = {
@@ -78,8 +97,8 @@ public class EmployeeController {
     @RequestMapping(value = "/employees/{id}", method = RequestMethod.PUT, produces = {
             "application/hal+json"})
 
-    public EmployeeDto updateEmployee( @RequestBody Employee employee,@PathVariable long id) {
-        return EmployeeDto.convertToDto(employeeService.editEmployee( employee,id));
+    public EmployeeDto updateEmployee(@RequestBody Employee employee, @PathVariable long id) {
+        return EmployeeDto.convertToDto(employeeService.editEmployee(employee, id));
     }
 
  /* public ResponseEntity<Object> updateEmployee(@RequestBody Employee employee,

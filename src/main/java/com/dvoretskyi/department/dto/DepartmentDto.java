@@ -16,37 +16,37 @@ import org.springframework.hateoas.ResourceSupport;
 @JsonInclude(Include.NON_NULL)
 public class DepartmentDto extends ResourceSupport {
 
-  private String name;
+    private String name;
 
-  public String getName() {
-    return name;
-  }
+    public String getName() {
+        return name;
+    }
 
-  public DepartmentDto(String name) {
-    this.name = name;
-  }
+    public DepartmentDto(String name) {
+        this.name = name;
+    }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-  public DepartmentDto() {
-  }
+    public DepartmentDto() {
+    }
 
-  /**
-   * Convert to dto department dto.
-   *
-   * @param department the department
-   * @return the department dto
-   */
-  public static DepartmentDto convertToDto(Department department) {
-    return new DepartmentDto(department.getName());
-  }
+    /**
+     * Convert to dto department dto.
+     *
+     * @param department the department
+     * @return the department dto
+     */
+    public static DepartmentDto convertToDto(Department department) {
+        return new DepartmentDto(department.getName());
+    }
 
-  @Override
-  public String toString() {
-    return "DepartmentDto{" +
-            "name='" + name + '\'' +
-            '}';
-  }
+    @Override
+    public String toString() {
+        return "DepartmentDto{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }

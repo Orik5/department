@@ -1,6 +1,8 @@
 package com.dvoretskyi.department.entity;
 
 
+import com.dvoretskyi.department.services.impl.EmployeeServiceImpl;
+
 import java.math.BigDecimal;
 
 public class Employee {

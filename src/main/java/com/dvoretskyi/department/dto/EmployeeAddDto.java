@@ -10,9 +10,9 @@ import org.springframework.hateoas.ResourceSupport;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(Include.NON_NULL)
-public class EmployeeAddDto  extends ResourceSupport {
+public class EmployeeAddDto extends ResourceSupport {
 
-  private String name;
-  private Boolean active;
-  private Department department;
+    private String name;
+    private Boolean active;
+    private Department department;
 }

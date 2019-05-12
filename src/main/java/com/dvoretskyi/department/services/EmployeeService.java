@@ -10,9 +10,7 @@ import java.util.List;
  */
 public interface EmployeeService {
 
-
     Employee findEmployeeById(long id);
-
 
     Employee saveEmployee(Employee employee);
 

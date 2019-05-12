@@ -7,12 +7,11 @@ import java.util.TreeSet;
  */
 
 
-
 public class Department {
 
-  private long id;
-  private String name;
-  private TreeSet<Employee> employee;
+    private long id;
+    private String name;
+    private TreeSet<Employee> employee;
 
     public long getId() {
         return id;
@@ -48,28 +47,28 @@ public class Department {
     }
 
     /**
-   * Instantiates a new Department.
-   *
-   * @param name the name
-   */
-  public Department(String name) {
-    this.name = name;
-  }
+     * Instantiates a new Department.
+     *
+     * @param name the name
+     */
+    public Department(String name) {
+        this.name = name;
+    }
 
     public Department() {
     }
 
     /**
-   * Create department.
-   *
-   * @param name the name
-   * @return the department
-   */
-  public static Department create(String name) {
-    Department department = new Department();
-    department.setName(name);
+     * Create department.
+     *
+     * @param name the name
+     * @return the department
+     */
+    public static Department create(String name) {
+        Department department = new Department();
+        department.setName(name);
 
-    return department;
-  }
+        return department;
+    }
 
 }

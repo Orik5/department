@@ -2,7 +2,6 @@ package com.dvoretskyi.department.controller;
 
 import com.dvoretskyi.department.dto.EmployeeDto;
 import com.dvoretskyi.department.entity.Employee;
-import com.dvoretskyi.department.services.PagginationsService;
 import com.dvoretskyi.department.services.impl.EmployeeServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -29,8 +28,7 @@ public class EmployeeController {
     public static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
     @Autowired
     private EmployeeServiceImpl employeeService;
-    @Autowired
-    private PagginationsService pagginationsService;
+
 
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully l list"),

@@ -19,6 +19,6 @@ public interface EmployeeRepository {
 
     Employee deleteEmployeeById(long id);
 
-    List<Employee> findPagedResultByEmployeeId(long id, int offset, int limit);
+    //List<Employee> findPagedResultByEmployeeId(long id, int offset, int limit);
 
 }

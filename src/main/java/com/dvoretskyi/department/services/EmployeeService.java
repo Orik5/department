@@ -2,8 +2,6 @@ package com.dvoretskyi.department.services;
 
 import com.dvoretskyi.department.dto.EmployeeDto;
 import com.dvoretskyi.department.entity.Employee;
-import com.dvoretskyi.department.entity.EmployeesResponse;
-import com.dvoretskyi.department.util.Paginator;
 
 import java.util.List;
 
@@ -24,6 +22,4 @@ public interface EmployeeService {
 
     List<Employee> getEmployeesByPage(int pageId, int total);
 
-
-    //EmployeesResponse getEmployees(Paginator paginator,String searchValue);
 }

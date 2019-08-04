@@ -1,36 +1,27 @@
 package com.dvoretskyi.department.repository.impl;
 
-import com.dvoretskyi.department.entity.Department;
 import com.dvoretskyi.department.entity.Employee;
-import com.dvoretskyi.department.entity.EmployeesResponse;
-import com.dvoretskyi.department.entity.mapper.DepartmentRowMapper;
 import com.dvoretskyi.department.entity.mapper.EmployeeRowMapper;
 import com.dvoretskyi.department.repository.EmployeeRepository;
-import com.dvoretskyi.department.util.Paginator;
 import com.google.common.collect.Lists;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.sql.DataSource;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-//@Transactional
+
 @Repository
 @CrossOrigin(origins = "http://localhost:4200")
 
@@ -42,7 +33,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     private DataSource dataSource;
-    //@Autowired
+
     private EntityManager entityManager;
 
 
@@ -78,7 +69,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     public Employee findEmployeeById(long id) {
         String sql = "SELECT employee_id, employee_first_name, employee_surname, employee_middle_name, employee_profession, " +
                 "employee_date_of_birth, employee_phone_number, employee_email, employee_salary, " +
-                "employee_active/*,FK_Emp_DP*/ FROM department_employee1.employee111 WHERE employee_id = ?";
+                "employee_active FROM department_employee1.employee111 WHERE employee_id = ?";
         RowMapper<Employee> rowMapper = new BeanPropertyRowMapper(Employee.class);
         return this.jdbcTemplate.queryForObject(sql, rowMapper, id);
         // return employee;
@@ -137,35 +128,8 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         return employee;
     }
 
-/*  @Override
-  public List<Employee> findByName(String name) {
-    *//*String sql = "id, name FROM department";
-    //RowMapper<Article> rowMapper = new BeanPropertyRowMapper<Article>(Article.class);
-    RowMapper<Employee> rowMapper = new EmployeeRowMapper();
-    return this.jdbcTemplate.query(sql, rowMapper);*//*
-    return null;
-  }*/
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public List<Employee> findPagedResultByEmployeeId(long id, int offset, int limit) {
-        String query = "select s.* from department_employee1 s. "
-                + "join employee on employee.id = s.FK_Empl_DP "
-                + "where employee.id = :employee_id; order by employee.firstname";
-        Query nativeQuery = entityManager.createNativeQuery(query);
-        nativeQuery.setParameter("id", id);
-        //Paginering
-        nativeQuery.setFirstResult(offset);
-        nativeQuery.setMaxResults(limit);
-        final List<Object[]> resultList = nativeQuery.getResultList();
-        List<Employee> employeeList = Lists.newArrayList();
-//        resultList
-//                .forEach(object -> employeeList.add(new Employee("Olaf", true, 3)));
-        return employeeList;
-    }
-
-
-    private Employee toEmployee(ResultSet resultSet) throws SQLException { // TODO: 5/9/2019 check if needed 
+    private Employee toEmployee(ResultSet resultSet) throws SQLException { // TODO: 5/9/2019 check if needed
         Employee employee = new Employee();
 
         employee.setId(resultSet.getLong("employee_id"));
@@ -183,10 +147,6 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         String sql = "SELECT * FROM department_employee1.employee111  left  JOIN department111 ON employee111.FK_Emp_DP = department111.FK_Emp_DP LIMIT " + (pageid - 1) + "," + total;
         RowMapper<Employee> rowMapper = new EmployeeRowMapper();
         return this.jdbcTemplate.query(sql, rowMapper);
-
-
-//        return getTemplate().query(sql, new RowMapper<Employee>() {
-//        return this.jdbcTemplate.query(sql, rowMapper);
 
 
     }

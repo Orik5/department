@@ -3,66 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <title>Department</title>
-  <style> table, th, td {
-    border: 1px solid black;
-  }</style>
+
 </head>
 
 <body>
-<h1></h1>
 
-<table style="width:70%">
-  <thead>
-
-  <tr>
-    <th>empId</th>
-    <th>empName</th>
-    <th>empActive</th>
-    <th>empDepartment</th>
-  </tr>
-  </thead>
-  <tbody>
-  <th:block th:each="employee : ${employees}">
-    <tr>
-      <td th:text="${employee.id}"></td>
-      <td th:text="${employee.name}"></td>
-      <td th:text="${employee.active}"></td>
-      <td th:text="${employee.department} == null ? '' : ${employee.department.name}"></td>
-      <td><a th:href="@{'/employees/' + ${employee.id}}">view</a></td>
-      <td><a th:href="@{'/editEmployee/' + ${employee.id}}">edit</a></td>
-      <td><a th:href="@{'/removeEmployee/' + ${employee.id}}">remove</a></td>
-    </tr>
-  </th:block>
-  </tbody>
-</table>
-<br>
-<table style="width: 70%">
-  <div>
-    <form action="/addEmployee" method="post">
-      <label for="empName">empName</label>
-      <input name="empName" id="empName" type="text">
-      <label for="empActive">empActive</label>
-      <input id="empActive" name="empActive" type="radio" value="true">
-      <label for="empNotActive">empNotActive</label>
-      <input id="empNotActive" name="empActive" type="radio" value="false">
-      <select name="department">
-        <option value="" text=""/>
-        <option th:each="department : ${departments}" th:value="${department.id}"
-                th:text="${department.name}"/>
-      </select>
-      <input type="submit"/>
-    </form>
-  </div>
-</table>
-
-<div class="topnav">
-  <h2>employee search</h2>
-  <form action="/search" method="post">
-    <input name="name" type="text" placeholder="Search..">
-    <input type="submit">
-  </form>
-</div>
-<a href="/addDepartment">Add department</a>
-<a href="/getDepartments">Get all departments</a>
 </body>
 </html>

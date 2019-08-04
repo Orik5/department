@@ -9,7 +9,6 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 /**
  * The type Department application.
  */
-//@EnableResourceServer
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 
 public class DepartmentApplication {

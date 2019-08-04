@@ -1,8 +1,6 @@
 package com.dvoretskyi.department.entity;
 
 
-import com.dvoretskyi.department.services.impl.EmployeeServiceImpl;
-
 import java.math.BigDecimal;
 
 public class Employee {
@@ -17,7 +15,7 @@ public class Employee {
     private String email;
     private BigDecimal salary;
     private boolean active;
-    private long department;
+    private String department;
 
 
     public Employee(String firstName, boolean active) {
@@ -28,7 +26,7 @@ public class Employee {
     public Employee(long id, String firstName, String surname,
                     String middleName, String profession, String dateOfBirth,
                     String phoneNumber, String email, BigDecimal salary,
-                    Boolean active, long department) {
+                    Boolean active, String department) {
         this.id = id;
         this.firstName = firstName;
         this.surname = surname;
@@ -125,11 +123,11 @@ public class Employee {
         this.active = active;
     }
 
-    public long getDepartment() {
+    public String getDepartment() {
         return department;
     }
 
-    public void setDepartment(long department) {
+    public void setDepartment(String department) {
         this.department = department;
     }
 

@@ -27,7 +27,6 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
     private DataSource dataSource;
-    //@Autowired
     private EntityManager entityManager;
 
     @Autowired
@@ -53,7 +52,6 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
         String sql = "SELECT  department_id, department_name  FROM department_employee1.department WHERE id = ?";
         RowMapper<Department> rowMapper = new BeanPropertyRowMapper<Department>(Department.class);
         return this.jdbcTemplate.queryForObject(sql, rowMapper, id);
-        //return department;
     }
 
     @Override
@@ -61,12 +59,10 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
         String sql = "INSERT INTO department_employee1.department (department_id, department_name) values (?, ?)";
         jdbcTemplate.update(sql, department.getId(), department.getName());
 
-        //Fetch article id
-        sql = "SELECT department_id FROM department_employee1.department WHERE department_name = ? /*and category=?*/";
+        sql = "SELECT department_id FROM department_employee1.department WHERE department_name = ? ";
         int id = jdbcTemplate
-                .queryForObject(sql, Integer.class, department.getName()/*, department.getEmployee()*/);
+                .queryForObject(sql, Integer.class, department.getName());
 
-        //Set article id
         department.setId(id);
     }
 

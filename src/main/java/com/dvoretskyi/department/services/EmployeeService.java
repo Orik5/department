@@ -2,6 +2,8 @@ package com.dvoretskyi.department.services;
 
 import com.dvoretskyi.department.dto.EmployeeDto;
 import com.dvoretskyi.department.entity.Employee;
+import com.dvoretskyi.department.entity.EmployeesResponse;
+import com.dvoretskyi.department.util.Paginator;
 
 import java.util.List;
 
@@ -19,11 +21,9 @@ public interface EmployeeService {
     Employee editEmployee(Employee employee, long id);
 
     Employee deleteEmployeeById(long id);
-    /*  Department findEmployeeByName(String name);*/
 
-    // Employee saveEmployee(String empName, Boolean empActive, Department department);
-
-//  List<Employee> findByName(String name);
+    List<Employee> getEmployeesByPage(int pageId, int total);
 
 
+    //EmployeesResponse getEmployees(Paginator paginator,String searchValue);
 }

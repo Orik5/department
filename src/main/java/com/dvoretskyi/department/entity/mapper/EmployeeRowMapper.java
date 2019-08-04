@@ -2,11 +2,10 @@ package com.dvoretskyi.department.entity.mapper;
 
 import com.dvoretskyi.department.entity.Employee;
 
-import java.math.BigDecimal;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 
 /**
@@ -19,7 +18,6 @@ public class EmployeeRowMapper implements RowMapper<Employee> {
     public Employee mapRow(ResultSet row, int rowNum) throws SQLException {
 
         Employee employee = new Employee();
-
         employee.setId(row.getLong("employee_id"));
         employee.setFirstName(row.getString("employee_first_name"));
         employee.setSurname(row.getString("employee_surname"));
@@ -30,8 +28,7 @@ public class EmployeeRowMapper implements RowMapper<Employee> {
         employee.setEmail(row.getString("employee_email"));
         employee.setSalary(row.getBigDecimal("employee_salary"));
         employee.setActive(row.getBoolean("employee_active"));
-        employee.setDepartment(row.getLong("FK_Emp_DP"));
-
+        employee.setDepartment(row.getString("department_name"));
         return employee;
 
 

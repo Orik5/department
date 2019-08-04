@@ -32,9 +32,9 @@ public class JdbcTemplateEmployeeTest {
         repository.postConstruct();
     }
 
-    @Test
+// @Test
     public void testJdbcTemplate(Employee employee) {
-        employeeService.create("Bob", true, 1);
+        employeeService.create("Bob", true, "fef");
         repository.addEmployee(employee);
    /* Department department = Department.create("HR");
     jdbcTemplateDepartment.save(department);*/

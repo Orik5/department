@@ -6,7 +6,6 @@ import java.util.TreeSet;
  * The type Department.
  */
 
-
 public class Department {
 
     private long id;

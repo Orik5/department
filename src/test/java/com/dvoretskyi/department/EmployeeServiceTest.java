@@ -14,15 +14,15 @@ import org.mockito.MockitoAnnotations;
 
 public class EmployeeServiceTest {
 
-  @Mock
-  private EmployeeRepositoryImpl employeeRepository;
-  @InjectMocks
-  private EmployeeServiceImpl employeeService;
+    @Mock
+    private EmployeeRepositoryImpl employeeRepository;
+    @InjectMocks
+    private EmployeeServiceImpl employeeService;
 
-  @Before
-  public void setUp() throws Exception {
-    MockitoAnnotations.initMocks(this);
-  }
+    @Before
+    public void setUp() throws Exception {
+        MockitoAnnotations.initMocks(this);
+    }
 
 
 
@@ -34,14 +34,17 @@ public class EmployeeServiceTest {
     assertThat(employeeService.saveEmployee(employee), is(notNullValue()));
   }*/
 
-  //Using Answer to set an id to the customer which is passed in as a parameter to the mock method.
+    @Test(expected = RuntimeException.class)
+    public void testAddEmployee_throwsException() {
+        when(employeeRepository.addEmployee(any(Employee.class))).thenThrow(RuntimeException.class);
+        Employee employee = new Employee();
+        employeeService.saveEmployee(employee);
+    }
 
-
-  //Throwing an exception from the mocked method
-  @Test(expected = RuntimeException.class)
-  public void testAddEmployee_throwsException() {
-    when(employeeRepository.addEmployee(any(Employee.class))).thenThrow(RuntimeException.class);
-    Employee employee = new Employee();
-    employeeService.saveEmployee(employee);//
-  }
+    @Test(expected = RuntimeException.class)
+    public void testDeleteEmployee_throwsException() {
+        Employee employee = new Employee();
+        when(employeeRepository.deleteEmployeeById(employee.getId())).thenThrow(RuntimeException.class);
+        employeeService.deleteEmployeeById(employee.getId());
+    }
 }

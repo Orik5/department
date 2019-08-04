@@ -1,25 +1,33 @@
 package com.dvoretskyi.department.repository.impl;
 
+import com.dvoretskyi.department.entity.Department;
 import com.dvoretskyi.department.entity.Employee;
+import com.dvoretskyi.department.entity.EmployeesResponse;
+import com.dvoretskyi.department.entity.mapper.DepartmentRowMapper;
 import com.dvoretskyi.department.entity.mapper.EmployeeRowMapper;
 import com.dvoretskyi.department.repository.EmployeeRepository;
+import com.dvoretskyi.department.util.Paginator;
 import com.google.common.collect.Lists;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.sql.DataSource;
 
-import jdk.nashorn.internal.ir.annotations.Ignore;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 //@Transactional
@@ -37,6 +45,15 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     //@Autowired
     private EntityManager entityManager;
 
+
+    public JdbcTemplate getTemplate() {
+        return jdbcTemplate;
+    }
+
+    public void setTemplate(JdbcTemplate template) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
     @Autowired
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
@@ -51,8 +68,8 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     public List<Employee> findAllEmployees() {
         String sql = "SELECT employee_id, employee_first_name, employee_surname, employee_middle_name, employee_profession," +
                 "employee_date_of_birth, employee_phone_number, employee_email, employee_salary," +
-                "employee_active,FK_Emp_DP FROM department_employee1.employee";
-        //RowMapper<Employee> rowMapper = new BeanPropertyRowMapper<Employee>(Employee.class);
+                "employee_active/*,FK_Emp_DP,*/,department_name FROM department_employee1.employee111" +
+                " left  JOIN department111 ON employee111.FK_Emp_DP = department111.FK_Emp_DP ";
         RowMapper<Employee> rowMapper = new EmployeeRowMapper();
         return this.jdbcTemplate.query(sql, rowMapper);
     }
@@ -61,7 +78,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     public Employee findEmployeeById(long id) {
         String sql = "SELECT employee_id, employee_first_name, employee_surname, employee_middle_name, employee_profession, " +
                 "employee_date_of_birth, employee_phone_number, employee_email, employee_salary, " +
-                "employee_active/*,FK_Emp_DP*/ FROM department_employee1.employee WHERE employee_id = ?";
+                "employee_active/*,FK_Emp_DP*/ FROM department_employee1.employee111 WHERE employee_id = ?";
         RowMapper<Employee> rowMapper = new BeanPropertyRowMapper(Employee.class);
         return this.jdbcTemplate.queryForObject(sql, rowMapper, id);
         // return employee;
@@ -69,24 +86,22 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
     @Override
     public Employee addEmployee(Employee employee) {/// TODO: 5/9/2019 check 
-        String sql = "INSERT INTO department_employee1.employee(employee_id,employee_first_name,employee_surname ,employee_middle_name," +
-                "employee_profession ,  employee_date_of_birth ," +
-                "  employee_phone_number,employee_email,employee_salary ,employee_active/*,FK_Emp_DP*/" +
-                "values (?,?,?,?,?,?,?,?,?,?/*,?*/)";
+        String sql = "INSERT INTO department_employee1.employee111(employee_id , employee_first_name,employee_surname ,employee_middle_name, employee_profession , employee_date_of_birth ,employee_phone_number,employee_email,employee_salary ,employee_active) values(?,?,?,?,?,?,?,?,?,?)";
+
         jdbcTemplate.update(sql, new Object[]{employee.getId(), employee.getFirstName(), employee.getSurname(),
                 employee.getMiddleName(), employee.getProfession(), employee.getDateOfBirth(),
                 employee.getPhoneNumber(), employee.getEmail(), employee.getSalary(),
-                employee.getActive() /*, employee.getDepartment()*/});
+                employee.getActive()/* , employee.getDepartment()*/});
 
         //Fetch employee id
-        sql = "SELECT employee_id FROM department_employee1.employee WHERE employee_first_name =? and employee_surname=? " +
+        sql = "SELECT employee_id FROM department_employee1.employee111 WHERE employee_first_name =? and employee_surname=? " +
                 "and employee_middle_name =? and employee_profession =? and   employee_date_of_birth=? and   employee_phone_number=?  " +
-                "and employee_email =? and employee_salary =? and employee_active=?/*and FK_Emp_DP=?*/";
+                "and employee_email =? and employee_salary =? and employee_active=? ";
         int id = jdbcTemplate
                 .queryForObject(sql, Integer.class, new Object[]{employee.getFirstName(), employee.getSurname(),
                         employee.getMiddleName(), employee.getProfession(), employee.getDateOfBirth(),
                         employee.getPhoneNumber(), employee.getEmail(), employee.getSalary(), employee.getActive()/*,
- //           employee.getDepartment()*/});
+            employee.getDepartment()*/});
 
         //Set employee id
         employee.setId(id);
@@ -94,46 +109,15 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     }
 
 
-    /*
-    public void addDashboard(DynamicDashboard dynamicDashboard) {
-        String sql = "INSERT INTO dynamic_dashboard "
-                + "(DASHBOARD_NAME, HTML_CONTENT,SCRIPT_CONTENT,RULE_CONTENT) VALUES (?, ?, ?,?)";
-
-        try {
-            jdbcTemplate = new JdbcTemplate(dataSource);
-
-            jdbcTemplate.update(sql,
-                    new Object[] { dynamicDashboard.getDashboardName(), dynamicDashboard.getHtmlContent(),
-                            dynamicDashboard.getScriptContent(), dynamicDashboard});
-        } catch (Exception ex) {
-            logger.error(ex.getMessage());
-        }
- public void addDashboard(DynamicDashboard dynamicDashboard) {
-        String sql = "INSERT INTO dynamic_dashboard "
-                + "(DASHBOARD_NAME, HTML_CONTENT,SCRIPT_CONTENT,RULE_CONTENT) VALUES (?, ?, ?,?)";
-
-        try {
-            jdbcTemplate = new JdbcTemplate(dataSource);
-
-            jdbcTemplate.update(sql,
-                    new Object[] { dynamicDashboard.getDashboardName(), dynamicDashboard.getHtmlContent(),
-                            dynamicDashboard.getScriptContent(), dynamicDashboard.getRuleContent()});
-        } catch (Exception ex) {
-            logger.error(ex.getMessage());
-        }
-
-    *
-    * */
     @Override
     public Employee updateEmployee(Employee employee, long id) {// TODO: 5/9/2019 check
-        String sql = "UPDATE department_employee1.employee SET employee_first_name =?, employee_surname=?, " +
+        String sql = "UPDATE department_employee1.employee111 SET employee_first_name =?, employee_surname=?, " +
                 "employee_middle_name =?, employee_profession =?, employee_date_of_birth=?, employee_phone_number=?," +
                 " employee_email =?, employee_salary =?, employee_active=? /*and FK_Emp_DP */WHERE employee_id=?";
         try {
             jdbcTemplate.update(sql, new Object[]{employee.getFirstName(), employee.getSurname(),
                     employee.getMiddleName(), employee.getProfession(), employee.getDateOfBirth(),
-                    employee.getPhoneNumber(), employee.getEmail(), employee.getSalary(), employee.getActive()/*,
- //           employee.getDepartment()*/, employee.getId()}/*, employee.getDepartment()*/);
+                    employee.getPhoneNumber(), employee.getEmail(), employee.getSalary(), employee.getActive()/*, employee.getDepartment()*/, employee.getId()});
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -146,7 +130,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     @Override
     public Employee deleteEmployeeById(long id) {
         Employee employee = new Employee();
-        String sql = "DELETE FROM department_employee1.employee WHERE employee_id=?";
+        String sql = "DELETE FROM department_employee1.employee111 WHERE employee_id=?";
         jdbcTemplate.update(sql, id);
 
         // RowMapper<Employee> rowMapper = new BeanPropertyRowMapper(Employee.class);
@@ -162,15 +146,12 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     return null;
   }*/
 
-/*
-    @SuppressWarnings("unchecked")*/
-
-   /* @Override
+    @SuppressWarnings("unchecked")
+    @Override
     public List<Employee> findPagedResultByEmployeeId(long id, int offset, int limit) {
         String query = "select s.* from department_employee1 s. "
                 + "join employee on employee.id = s.FK_Empl_DP "
-                + "where employee.id = :employee_id";
-        //+ "order by selse.date";
+                + "where employee.id = :employee_id; order by employee.firstname";
         Query nativeQuery = entityManager.createNativeQuery(query);
         nativeQuery.setParameter("id", id);
         //Paginering
@@ -178,10 +159,11 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         nativeQuery.setMaxResults(limit);
         final List<Object[]> resultList = nativeQuery.getResultList();
         List<Employee> employeeList = Lists.newArrayList();
-        resultList
-                .forEach(object -> employeeL ist.add(new Employee("Olaf", true, 3)));
+//        resultList
+//                .forEach(object -> employeeList.add(new Employee("Olaf", true, 3)));
         return employeeList;
-    }*/
+    }
+
 
     private Employee toEmployee(ResultSet resultSet) throws SQLException { // TODO: 5/9/2019 check if needed 
         Employee employee = new Employee();
@@ -189,11 +171,24 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         employee.setId(resultSet.getLong("employee_id"));
         employee.setFirstName(resultSet.getString("employee_name"));
         employee.setActive(resultSet.getBoolean("active"));
-        employee.setDepartment(resultSet.getLong("FK_Emp_DP"));
+        //employee.setDepartment(resultSet.getLong("FK_Emp_DP"));
         return employee;
     }
 
     public JdbcTemplate getJdbcTemplate() {
         return jdbcTemplate;
     }
+
+    public List<Employee> getEmployeesByPage(int pageid, int total) {
+        String sql = "SELECT * FROM department_employee1.employee111  left  JOIN department111 ON employee111.FK_Emp_DP = department111.FK_Emp_DP LIMIT " + (pageid - 1) + "," + total;
+        RowMapper<Employee> rowMapper = new EmployeeRowMapper();
+        return this.jdbcTemplate.query(sql, rowMapper);
+
+
+//        return getTemplate().query(sql, new RowMapper<Employee>() {
+//        return this.jdbcTemplate.query(sql, rowMapper);
+
+
+    }
+
 }

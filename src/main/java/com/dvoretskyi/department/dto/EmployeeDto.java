@@ -24,7 +24,7 @@ public class EmployeeDto {
     private String email;
     private BigDecimal salary;
     private boolean active;
-    private Long department;
+    private String department;
 
     public Long getId() {
         return id;
@@ -106,11 +106,11 @@ public class EmployeeDto {
         this.active = active;
     }
 
-    public Long getDepartment() {
+    public String getDepartment() {
         return department;
     }
 
-    public void setDepartment(Long department) {
+    public void setDepartment(String department) {
         this.department = department;
     }
 
@@ -119,7 +119,7 @@ public class EmployeeDto {
 
     public EmployeeDto(Long id, String firstName, String surname, String middleName,
                        String profession, String dateOfBirth, String phoneNumber,
-                       String email, BigDecimal salary, Boolean active, Long department) {
+                       String email, BigDecimal salary, Boolean active, String department) {
         this.id = id;
         this.firstName = firstName;
         this.surname = surname;
@@ -140,7 +140,7 @@ public class EmployeeDto {
      * @return the employee dto
      */
     public static EmployeeDto convertToDto(Employee employee) {
-        return new EmployeeDto(employee.getId(), employee.getFirstName(), employee.getSurname(), employee.getMiddleName(),
+               return new EmployeeDto(employee.getId(), employee.getFirstName(), employee.getSurname(), employee.getMiddleName(),
                 employee.getProfession(), employee.getDateOfBirth(), employee.getPhoneNumber(), employee.getEmail(), employee.getSalary(), employee.getActive()
                 , employee.getDepartment());
 
